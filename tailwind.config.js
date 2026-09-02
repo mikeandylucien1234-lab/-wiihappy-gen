@@ -88,6 +88,16 @@ export default {
       screens: {
         xs: '480px',
       },
+      keyframes: {
+        pulseDot: {
+          '0%': { boxShadow: '0 0 0 0 rgba(255,140,0,0.55)' },
+          '70%': { boxShadow: '0 0 0 12px rgba(255,140,0,0)' },
+          '100%': { boxShadow: '0 0 0 0 rgba(255,140,0,0)' },
+        },
+      },
+      animation: {
+        'pulse-dot': 'pulseDot 2s infinite',
+      },
     },
   },
   plugins: [],

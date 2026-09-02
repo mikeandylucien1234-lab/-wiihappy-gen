@@ -1,0 +1,66 @@
+import { useEffect, useState } from 'react'
+import { Button, Logo } from '@/components/ui'
+import { useQuoteDrawer } from '@/features/quote-drawer/QuoteDrawerContext'
+import { cn } from '@/lib/cn'
+
+const navItems = [
+  { label: 'Services', href: '#services' },
+  { label: 'Comment ça marche', href: '#comment' },
+  { label: 'Catégories', href: '#categories' },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Contact', href: '#footer' },
+]
+
+export function Header() {
+  const [scrolled, setScrolled] = useState(false)
+  const { openDrawer } = useQuoteDrawer()
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  return (
+    <header
+      className={cn(
+        'sticky top-0 z-50 bg-white transition-shadow duration-300',
+        scrolled ? 'bg-white/96 shadow-[0_4px_20px_rgba(10,42,102,0.08)] backdrop-blur-sm' : 'shadow-none',
+      )}
+    >
+      <div className="mx-auto flex max-w-content flex-wrap items-center gap-x-6 gap-y-2.5 px-6 py-4">
+        <a href="#hero" className="flex flex-none items-baseline">
+          <Logo />
+        </a>
+
+        <nav className="mx-auto flex flex-wrap items-start gap-[26px]">
+          <div className="flex flex-col items-center gap-1.5">
+            <a href="#hero" className="whitespace-nowrap text-[14.5px] font-bold text-ink">
+              Accueil
+            </a>
+            <div className="h-[5px] w-[5px] rounded-full bg-accent" />
+          </div>
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="self-start whitespace-nowrap pt-px text-[14.5px] font-semibold text-ink"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="ml-auto flex flex-none items-center gap-[18px]">
+          <div className="text-[13.5px] leading-tight text-ink">
+            <div className="font-extrabold">56 9 12567898</div>
+            <div className="text-xs text-slate">Lun-Sam 08:00 - 20:00</div>
+          </div>
+          <Button variant="accent" onClick={openDrawer} className="flex-none whitespace-nowrap">
+            Demander un devis <span>→</span>
+          </Button>
+        </div>
+      </div>
+    </header>
+  )
+}

@@ -1,0 +1,86 @@
+import { Logo } from '@/components/ui'
+
+const navLinks = [
+  { label: 'Accueil', href: '#hero' },
+  { label: 'Services', href: '#services' },
+  { label: 'Comment ça marche', href: '#comment' },
+  { label: 'Catégories', href: '#categories' },
+  { label: 'FAQ', href: '#faq' },
+]
+
+const socialIcons = [
+  {
+    label: 'Facebook',
+    path: 'M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.2.2 2.5.3v2.7h-1.4c-1.2 0-1.5.6-1.5 1.4V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z',
+  },
+  {
+    label: 'Instagram',
+    path: 'M12 2.2c2.7 0 3 0 4 .1 1 .1 1.7.2 2.3.5.6.3 1.1.6 1.6 1.1.5.5.8 1 1.1 1.6.2.6.4 1.3.5 2.3.1 1 .1 1.3.1 4s0 3-.1 4c-.1 1-.2 1.7-.5 2.3-.3.6-.6 1.1-1.1 1.6-.5.5-1 .8-1.6 1.1-.6.2-1.3.4-2.3.5-1 .1-1.3.1-4 .1s-3 0-4-.1c-1-.1-1.7-.2-2.3-.5-.6-.3-1.1-.6-1.6-1.1-.5-.5-.8-1-1.1-1.6-.2-.6-.4-1.3-.5-2.3-.1-1-.1-1.3-.1-4s0-3 .1-4c.1-1 .2-1.7.5-2.3.3-.6.6-1.1 1.1-1.6.5-.5 1-.8 1.6-1.1.6-.2 1.3-.4 2.3-.5 1-.1 1.3-.1 4-.1zm0 3.5a6.3 6.3 0 1 0 0 12.6 6.3 6.3 0 0 0 0-12.6zm0 10.4a4.1 4.1 0 1 1 0-8.2 4.1 4.1 0 0 1 0 8.2zm6.4-10.6a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0z',
+  },
+  {
+    label: 'LinkedIn',
+    path: 'M17.5 2h-11A4.5 4.5 0 0 0 2 6.5v11A4.5 4.5 0 0 0 6.5 22h11a4.5 4.5 0 0 0 4.5-4.5v-11A4.5 4.5 0 0 0 17.5 2zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z',
+  },
+]
+
+export function Footer() {
+  return (
+    <footer id="footer" className="mt-24 bg-gradient-footer px-6 pb-[30px] pt-[70px] text-white/85">
+      <div className="mx-auto grid max-w-content grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-10 border-b border-white/15 pb-10">
+        <div>
+          <Logo variant="light" className="mb-[14px]" />
+          <p className="text-sm leading-[1.6] text-white/65">
+            Courtage et sourcing international — véhicules, agroalimentaire, textile, électronique.
+          </p>
+        </div>
+
+        <div>
+          <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">Navigation</h5>
+          <div className="flex flex-col gap-2.5">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} className="text-[14.5px] text-white/75">
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">Contact</h5>
+          <div className="flex flex-col gap-2.5 text-[14.5px] text-white/75">
+            <span>contact@wiihappy.com</span>
+            <span>WhatsApp +56 9 123 456</span>
+            <span>Lun-Sam 08:00 - 20:00</span>
+          </div>
+        </div>
+
+        <div>
+          <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">Suivez-nous</h5>
+          <div className="mb-5 flex gap-3">
+            {socialIcons.map((icon) => (
+              <a
+                key={icon.label}
+                href="#"
+                aria-label={icon.label}
+                className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-white/[0.12]"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
+                  <path d={icon.path} />
+                </svg>
+              </a>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <span className="rounded-md bg-white/[0.15] px-2.5 py-[5px] text-xs font-bold">FR</span>
+            <span className="rounded-md bg-white/[0.06] px-2.5 py-[5px] text-xs font-bold text-white/50">EN</span>
+            <span className="rounded-md bg-white/[0.06] px-2.5 py-[5px] text-xs font-bold text-white/50">ES</span>
+          </div>
+        </div>
+      </div>
+
+      <p className="mx-auto mt-6 max-w-content text-center text-[13px] text-white/50">
+        © 2026 Wiihappy Gen. Tous droits réservés.
+      </p>
+    </footer>
+  )
+}
