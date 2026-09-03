@@ -1,5 +1,5 @@
 import { Button, ImagePlaceholder } from '@/components/ui'
-import { useQuoteDrawer } from '@/features/quote-drawer/QuoteDrawerContext'
+import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
 
 const features = [
   {
@@ -37,7 +37,7 @@ const features = [
 ]
 
 export function GlobalReach() {
-  const { openDrawer } = useQuoteDrawer()
+  const { openDrawer } = useQuoteForm()
 
   return (
     <section className="mx-auto max-w-content px-6 pt-[100px]">
@@ -59,7 +59,7 @@ export function GlobalReach() {
               </div>
             </div>
           ))}
-          <Button variant="accent" onClick={openDrawer} className="mt-1.5 self-start">
+          <Button variant="accent" onClick={() => openDrawer()} className="mt-1.5 self-start">
             Contactez-nous <span>→</span>
           </Button>
         </div>

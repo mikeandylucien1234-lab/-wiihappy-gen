@@ -1,11 +1,12 @@
+import { Link } from '@tanstack/react-router'
 import { Logo } from '@/components/ui'
 
 const navLinks = [
-  { label: 'Accueil', href: '#hero' },
-  { label: 'Services', href: '#services' },
-  { label: 'Comment ça marche', href: '#comment' },
-  { label: 'Catégories', href: '#categories' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Accueil', hash: 'hero' },
+  { label: 'Services', hash: 'services' },
+  { label: 'Comment ça marche', hash: 'comment' },
+  { label: 'Catégories', hash: 'categories' },
+  { label: 'FAQ', hash: 'faq' },
 ]
 
 const socialIcons = [
@@ -38,9 +39,9 @@ export function Footer() {
           <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">Navigation</h5>
           <div className="flex flex-col gap-2.5">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-[14.5px] text-white/75">
+              <Link key={link.hash} to="/" hash={link.hash} className="text-[14.5px] text-white/75">
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

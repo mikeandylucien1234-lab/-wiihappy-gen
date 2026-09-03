@@ -24,7 +24,7 @@ const services = [
     items: ['Cotation logistique sur mesure', 'Aérien ou maritime'],
   },
   {
-    slug: 'sourcing',
+    slug: 'sourcing-personnalise',
     title: 'Sourcing personnalisé',
     color: '#FF8C00',
     icon: (
@@ -36,7 +36,7 @@ const services = [
     items: ['Produit hors catalogue accepté', 'Achat et expédition pris en charge'],
   },
   {
-    slug: 'douane',
+    slug: 'accompagnement-douane',
     title: 'Accompagnement douane',
     color: '#FF8C00',
     icon: (

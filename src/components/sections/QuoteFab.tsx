@@ -1,7 +1,7 @@
-import { useQuoteDrawer } from '@/features/quote-drawer/QuoteDrawerContext'
+import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
 
 export function QuoteFab() {
-  const { drawerOpen, toggleDrawer, showTooltip, showBadge } = useQuoteDrawer()
+  const { drawerOpen, toggleDrawer, showTooltip, showBadge } = useQuoteForm()
 
   return (
     <div className="fixed bottom-7 right-7 z-[200] flex flex-col items-end gap-2.5">

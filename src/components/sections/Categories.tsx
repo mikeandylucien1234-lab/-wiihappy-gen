@@ -1,15 +1,15 @@
 import { ImagePlaceholder } from '@/components/ui'
-import { useQuoteDrawer } from '@/features/quote-drawer/QuoteDrawerContext'
+import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
 
 const categories = [
-  { label: 'Véhicules', placeholder: 'Véhicules' },
-  { label: 'Ciment', placeholder: 'Alimentation' },
-  { label: 'Habillement', placeholder: 'Habillement' },
-  { label: 'Autre / Sourcing', placeholder: 'Sourcing sur-mesure' },
+  { label: 'Véhicules', placeholder: 'Véhicules', formCategory: 'Véhicules' },
+  { label: 'Ciment', placeholder: 'Alimentation', formCategory: 'Alimentation' },
+  { label: 'Habillement', placeholder: 'Habillement', formCategory: 'Habillement' },
+  { label: 'Autre / Sourcing', placeholder: 'Sourcing sur-mesure', formCategory: 'Autre' },
 ]
 
 export function Categories() {
-  const { openDrawer } = useQuoteDrawer()
+  const { openDrawer } = useQuoteForm()
 
   return (
     <section id="categories" className="mx-auto max-w-content px-6 pt-[100px]">
@@ -21,7 +21,12 @@ export function Categories() {
           <button
             key={category.label}
             type="button"
-            onClick={openDrawer}
+            onClick={() =>
+              openDrawer({
+                category: category.formCategory,
+                sourcePage: `categories-${category.formCategory.toLowerCase()}`,
+              })
+            }
             className="relative block h-[260px] overflow-hidden rounded-xl text-left"
           >
             <div className="absolute inset-0">

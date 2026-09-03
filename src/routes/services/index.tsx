@@ -1,18 +1,42 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { Footer } from '@/components/sections/Footer'
+import { Header } from '@/components/sections/Header'
+import { Card } from '@/components/ui'
+import { services } from '@/features/services/data'
 
 export const Route = createFileRoute('/services/')({
   component: ServicesIndex,
 })
 
-// Placeholder — the services listing page isn't built yet. Exists so the
-// landing page's "Tous les services" link has a real, non-breaking route.
 function ServicesIndex() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-surface font-sans text-ink">
-      <p className="text-body text-slate">Page "Tous les services" à venir.</p>
-      <Link to="/" className="text-sm font-bold text-primary">
-        ← Retour à l&apos;accueil
-      </Link>
+    <div className="overflow-x-hidden bg-surface text-ink">
+      <Header />
+
+      <section className="mx-auto max-w-content px-6 pt-14">
+        <div className="mb-3 text-eyebrow text-primary">NOS SERVICES</div>
+        <h1 className="mb-4 text-h1 text-ink">Des solutions pour chaque besoin</h1>
+        <p className="mb-12 max-w-[560px] text-body-lg text-slate">
+          Import, export, sourcing personnalisé ou accompagnement douane — choisissez le service qui correspond à
+          votre projet.
+        </p>
+
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-[22px] pb-[100px]">
+          {services.map((service) => (
+            <Link key={service.slug} to="/services/$slug" params={{ slug: service.slug }} className="block">
+              <Card radius="xl" padding="md" shadow="md" hoverable className="h-full text-inherit">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke={service.iconColor} strokeWidth="1.6">
+                  {service.icon}
+                </svg>
+                <h3 className="mb-2 mt-5 text-lg font-bold text-ink">{service.eyebrow}</h3>
+                <p className="text-sm leading-[1.6] text-slate">{service.description}</p>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <Footer />
     </div>
   )
 }

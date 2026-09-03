@@ -1,5 +1,5 @@
 import { Button, Card, ImagePlaceholder } from '@/components/ui'
-import { useQuoteDrawer } from '@/features/quote-drawer/QuoteDrawerContext'
+import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
 
 interface InfoCardProps {
   gradient: string
@@ -26,7 +26,11 @@ function InfoCard({ gradient, title, description, children }: InfoCardProps) {
 }
 
 export function Consultation() {
-  const { openConsultation } = useQuoteDrawer()
+  const { openDrawer } = useQuoteForm()
+
+  function openConsultation() {
+    openDrawer({ description: 'Consultation — ', sourcePage: 'consultation' })
+  }
 
   return (
     <section className="mx-auto max-w-content px-6 pt-[100px]">

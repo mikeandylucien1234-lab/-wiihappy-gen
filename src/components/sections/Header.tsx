@@ -1,19 +1,20 @@
+import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { Button, Logo } from '@/components/ui'
-import { useQuoteDrawer } from '@/features/quote-drawer/QuoteDrawerContext'
+import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
 import { cn } from '@/lib/cn'
 
 const navItems = [
-  { label: 'Services', href: '#services' },
-  { label: 'Comment ça marche', href: '#comment' },
-  { label: 'Catégories', href: '#categories' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Contact', href: '#footer' },
+  { label: 'Services', hash: 'services' },
+  { label: 'Comment ça marche', hash: 'comment' },
+  { label: 'Catégories', hash: 'categories' },
+  { label: 'FAQ', hash: 'faq' },
+  { label: 'Contact', hash: 'footer' },
 ]
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
-  const { openDrawer } = useQuoteDrawer()
+  const { openDrawer } = useQuoteForm()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -29,25 +30,26 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex max-w-content flex-wrap items-center gap-x-6 gap-y-2.5 px-6 py-4">
-        <a href="#hero" className="flex flex-none items-baseline">
+        <Link to="/" className="flex flex-none items-baseline">
           <Logo />
-        </a>
+        </Link>
 
         <nav className="mx-auto flex flex-wrap items-start gap-[26px]">
           <div className="flex flex-col items-center gap-1.5">
-            <a href="#hero" className="whitespace-nowrap text-[14.5px] font-bold text-ink">
+            <Link to="/" hash="hero" className="whitespace-nowrap text-[14.5px] font-bold text-ink">
               Accueil
-            </a>
+            </Link>
             <div className="h-[5px] w-[5px] rounded-full bg-accent" />
           </div>
           {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
+            <Link
+              key={item.hash}
+              to="/"
+              hash={item.hash}
               className="self-start whitespace-nowrap pt-px text-[14.5px] font-semibold text-ink"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -56,7 +58,7 @@ export function Header() {
             <div className="font-extrabold">56 9 12567898</div>
             <div className="text-xs text-slate">Lun-Sam 08:00 - 20:00</div>
           </div>
-          <Button variant="accent" onClick={openDrawer} className="flex-none whitespace-nowrap">
+          <Button variant="accent" onClick={() => openDrawer()} className="flex-none whitespace-nowrap">
             Demander un devis <span>→</span>
           </Button>
         </div>
