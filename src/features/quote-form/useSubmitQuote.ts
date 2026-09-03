@@ -25,10 +25,19 @@ async function uploadAttachments(attachments: File[]): Promise<string[]> {
 async function submitQuote(form: QuoteFormData & { sourcePage?: string }) {
   const attachmentPaths = await uploadAttachments(form.attachments)
 
-  // No .select() here: the anon role can only INSERT into devis (see
-  // supabase/migrations/0001_init.sql), not SELECT, so asking PostgREST to
-  // return the inserted row would fail its own RLS check on the read-back
-  // even though the insert itself succeeded.
+  // Attach the devis to the logged-in user, if any, so it shows up in their
+  // "Mon compte" area. Read fresh at submit time rather than threading auth
+  // state through the form context — a user could log in partway through
+  // filling the form. Anonymous submissions (no session) keep user_id null.
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  // No .select() here: neither the anon nor the authenticated RLS policy on
+  // devis grants SELECT to the submitter beyond re-reading their own rows —
+  // and even for a logged-in user, asking PostgREST to read the row back
+  // (Prefer: return=representation) is an extra round-trip we don't need,
+  // since the UI only shows a static confirmation screen.
   const { error } = await supabase.from('devis').insert({
     op_type: form.opType,
     name: form.name.trim(),
@@ -42,6 +51,7 @@ async function submitQuote(form: QuoteFormData & { sourcePage?: string }) {
     transport: form.transport,
     attachment_paths: attachmentPaths,
     source_page: form.sourcePage ?? null,
+    user_id: user?.id ?? null,
   })
 
   if (error) {

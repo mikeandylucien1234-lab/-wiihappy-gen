@@ -11,7 +11,7 @@
  * resolve against `interface`-declared shapes and silently fall back to `never`.
  */
 
-export type DevisStatus = 'nouveau' | 'en_cours' | 'traite' | 'archive'
+export type DevisStatus = 'nouveau' | 'en_cours' | 'accepte' | 'refuse' | 'traite' | 'archive'
 export type DevisOpType = 'Import' | 'Export'
 export type DevisTransport = 'Aérien' | 'Maritime'
 
@@ -39,6 +39,7 @@ export type Database = {
           source_page: string | null
           status: DevisStatus
           transport: DevisTransport | null
+          user_id: string | null
           whatsapp: string | null
         }
         Insert: {
@@ -56,6 +57,7 @@ export type Database = {
           source_page?: string | null
           status?: DevisStatus
           transport?: DevisTransport | null
+          user_id?: string | null
           whatsapp?: string | null
         }
         Update: {
@@ -73,9 +75,57 @@ export type Database = {
           source_page?: string | null
           status?: DevisStatus
           transport?: DevisTransport | null
+          user_id?: string | null
           whatsapp?: string | null
         }
         Relationships: []
+      }
+      paiements: {
+        Row: {
+          amount: number
+          bic: string | null
+          created_at: string
+          currency: string
+          devis_id: string
+          due_date: string | null
+          iban: string | null
+          id: string
+          instructions: string | null
+          reference: string | null
+        }
+        Insert: {
+          amount: number
+          bic?: string | null
+          created_at?: string
+          currency?: string
+          devis_id: string
+          due_date?: string | null
+          iban?: string | null
+          id?: string
+          instructions?: string | null
+          reference?: string | null
+        }
+        Update: {
+          amount?: number
+          bic?: string | null
+          created_at?: string
+          currency?: string
+          devis_id?: string
+          due_date?: string | null
+          iban?: string | null
+          id?: string
+          instructions?: string | null
+          reference?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'paiements_devis_id_fkey'
+            columns: ['devis_id']
+            isOneToOne: false
+            referencedRelation: 'devis'
+            referencedColumns: ['id']
+          },
+        ]
       }
     }
     Views: Record<string, never>

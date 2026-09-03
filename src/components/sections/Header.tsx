@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { Button, Logo } from '@/components/ui'
+import { useAuth } from '@/features/auth/AuthContext'
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
 import { cn } from '@/lib/cn'
 
@@ -15,6 +16,7 @@ const navItems = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const { openDrawer } = useQuoteForm()
+  const { user } = useAuth()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -54,7 +56,17 @@ export function Header() {
         </nav>
 
         <div className="ml-auto flex flex-none items-center gap-[18px]">
-          <div className="text-[13.5px] leading-tight text-ink">
+          <Link
+            to={user ? '/mon-compte' : '/connexion'}
+            className="hidden items-center gap-1.5 whitespace-nowrap text-[13.5px] font-bold text-ink sm:flex"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21c0-4 3.6-6 8-6s8 2 8 6" />
+            </svg>
+            {user ? 'Mon compte' : 'Connexion'}
+          </Link>
+          <div className="hidden text-[13.5px] leading-tight text-ink md:block">
             <div className="font-extrabold">56 9 12567898</div>
             <div className="text-xs text-slate">Lun-Sam 08:00 - 20:00</div>
           </div>
