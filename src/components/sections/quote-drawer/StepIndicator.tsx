@@ -1,8 +1,11 @@
 import { Fragment } from 'react'
 import { STEPS } from '@/features/quote-form/types'
+import { useLocale } from '@/i18n/LocaleContext'
 import { cn } from '@/lib/cn'
 
 export function StepIndicator({ step }: { step: number }) {
+  const { t } = useLocale()
+
   return (
     <div className="mb-8">
       <div className="flex items-center gap-1.5">
@@ -25,7 +28,7 @@ export function StepIndicator({ step }: { step: number }) {
         ))}
       </div>
       <div className="mt-2.5 text-xs font-bold text-slate">
-        Étape {step}/{STEPS.length} — {STEPS[step - 1].label}
+        {t.quoteSteps.indicator(step, STEPS.length, t.quoteSteps.labels[step - 1])}
       </div>
     </div>
   )

@@ -2,8 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useMemo } from 'react'
 import { SimpleBarChart } from '@/components/admin/SimpleBarChart'
 import { Card } from '@/components/ui'
-import { statusLabels } from '@/features/account/status'
 import { useAdminDevisList } from '@/features/admin/queries'
+import { useLocale } from '@/i18n/LocaleContext'
 import type { DevisStatus } from '@/lib/database.types'
 
 export const Route = createFileRoute('/admin/statistiques')({
@@ -23,17 +23,19 @@ const monthFormatter = new Intl.DateTimeFormat('fr-FR', { month: 'short', year: 
 
 function AdminStatistiques() {
   const { data: devis, isLoading } = useAdminDevisList()
+  const { t } = useLocale()
+  const s = t.admin.statistiques
 
   const statusData = useMemo(() => {
     if (!devis) return []
-    const counts = Object.fromEntries(Object.keys(statusColors).map((s) => [s, 0])) as Record<DevisStatus, number>
+    const counts = Object.fromEntries(Object.keys(statusColors).map((st) => [st, 0])) as Record<DevisStatus, number>
     for (const d of devis) counts[d.status] += 1
     return (Object.keys(counts) as DevisStatus[]).map((status) => ({
-      label: statusLabels[status],
+      label: t.devisStatus[status],
       value: counts[status],
       color: statusColors[status],
     }))
-  }, [devis])
+  }, [devis, t])
 
   const categoryData = useMemo(() => {
     if (!devis) return []
@@ -64,29 +66,29 @@ function AdminStatistiques() {
 
   return (
     <div>
-      <h1 className="mb-1 text-2xl font-extrabold tracking-[-0.5px] text-ink">Statistiques</h1>
-      <p className="mb-6 text-sm text-slate">Vue d&apos;ensemble de l&apos;activité devis.</p>
+      <h1 className="mb-1 text-2xl font-extrabold tracking-[-0.5px] text-ink">{s.title}</h1>
+      <p className="mb-6 text-sm text-slate">{s.subtitle}</p>
 
-      {isLoading && <p className="text-sm text-slate">Chargement...</p>}
+      {isLoading && <p className="text-sm text-slate">{s.loading}</p>}
 
       {devis && (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <Card radius="lg" padding="md" shadow="none" className="border-[1.5px] border-navy/[0.08]">
-            <h2 className="mb-4 text-base font-extrabold text-ink">Devis par statut</h2>
+            <h2 className="mb-4 text-base font-extrabold text-ink">{s.byStatus}</h2>
             <SimpleBarChart data={statusData} />
           </Card>
 
           <Card radius="lg" padding="md" shadow="none" className="border-[1.5px] border-navy/[0.08]">
-            <h2 className="mb-4 text-base font-extrabold text-ink">Devis par catégorie</h2>
+            <h2 className="mb-4 text-base font-extrabold text-ink">{s.byCategory}</h2>
             {categoryData.length === 0 ? (
-              <p className="text-sm text-slate">Aucune donnée.</p>
+              <p className="text-sm text-slate">{s.noData}</p>
             ) : (
               <SimpleBarChart data={categoryData} />
             )}
           </Card>
 
           <Card radius="lg" padding="md" shadow="none" className="border-[1.5px] border-navy/[0.08] lg:col-span-2">
-            <h2 className="mb-4 text-base font-extrabold text-ink">Devis reçus — 6 derniers mois</h2>
+            <h2 className="mb-4 text-base font-extrabold text-ink">{s.byMonth}</h2>
             <SimpleBarChart data={monthlyData} />
           </Card>
         </div>

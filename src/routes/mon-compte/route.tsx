@@ -1,6 +1,7 @@
 import { Link, Outlet, createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
 import { Logo } from '@/components/ui'
 import { useAuth } from '@/features/auth/AuthContext'
+import { useLocale } from '@/i18n/LocaleContext'
 import { supabase } from '@/lib/supabase'
 
 export const Route = createFileRoute('/mon-compte')({
@@ -18,6 +19,7 @@ export const Route = createFileRoute('/mon-compte')({
 function AccountLayout() {
   const { user, signOut } = useAuth()
   const navigate = useNavigate()
+  const { t } = useLocale()
 
   async function handleSignOut() {
     await signOut()
@@ -38,7 +40,7 @@ function AccountLayout() {
               activeProps={{ className: 'text-primary' }}
               activeOptions={{ exact: true }}
             >
-              Mes devis
+              {t.account.myDevisNav}
             </Link>
           </nav>
           <div className="ml-auto flex items-center gap-4">
@@ -48,7 +50,7 @@ function AccountLayout() {
               onClick={handleSignOut}
               className="rounded-pill border-[1.5px] border-navy/15 px-4 py-2 text-sm font-bold text-ink"
             >
-              Déconnexion
+              {t.account.signOut}
             </button>
           </div>
         </div>

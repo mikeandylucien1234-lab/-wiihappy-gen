@@ -1,15 +1,18 @@
 import { useRef } from 'react'
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
-
-function formatSize(bytes: number) {
-  if (bytes < 1024) return `${bytes} o`
-  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} Ko`
-  return `${(bytes / (1024 * 1024)).toFixed(1)} Mo`
-}
+import { useLocale } from '@/i18n/LocaleContext'
 
 export function AttachmentsField() {
   const { form, addAttachments, removeAttachment } = useQuoteForm()
+  const { t } = useLocale()
+  const a = t.quoteSteps.attachmentsField
   const inputRef = useRef<HTMLInputElement>(null)
+
+  function formatSize(bytes: number) {
+    if (bytes < 1024) return `${bytes} ${a.unitByte}`
+    if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} ${a.unitKilo}`
+    return `${(bytes / (1024 * 1024)).toFixed(1)} ${a.unitMega}`
+  }
 
   return (
     <div>
@@ -33,7 +36,7 @@ export function AttachmentsField() {
           <path d="M12 3v12m0-12 4 4m-4-4-4 4" />
           <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
         </svg>
-        Ajouter photo / fiche technique
+        {a.add}
       </button>
 
       {form.attachments.length > 0 && (
@@ -49,7 +52,7 @@ export function AttachmentsField() {
                 <button
                   type="button"
                   onClick={() => removeAttachment(i)}
-                  aria-label={`Retirer ${file.name}`}
+                  aria-label={a.removeAria(file.name)}
                   className="font-bold text-danger"
                 >
                   ✕

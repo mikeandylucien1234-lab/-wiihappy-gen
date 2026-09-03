@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { Badge, Card } from '@/components/ui'
 import { useMyDevis } from '@/features/account/queries'
-import { statusBadgeVariant, statusLabels } from '@/features/account/status'
+import { statusBadgeVariant } from '@/features/account/status'
+import { useLocale } from '@/i18n/LocaleContext'
 
 export const Route = createFileRoute('/mon-compte/')({
   component: MyDevisList,
@@ -9,26 +10,23 @@ export const Route = createFileRoute('/mon-compte/')({
 
 function MyDevisList() {
   const { data: devis, isLoading, isError } = useMyDevis()
+  const { t } = useLocale()
+  const l = t.account.list
 
   return (
     <div>
-      <h1 className="mb-1 text-h2 text-ink">Mes devis</h1>
-      <p className="mb-8 text-sm text-slate">Retrouvez ici l&apos;historique et le statut de vos demandes.</p>
+      <h1 className="mb-1 text-h2 text-ink">{l.title}</h1>
+      <p className="mb-8 text-sm text-slate">{l.subtitle}</p>
 
-      {isLoading && <p className="text-sm text-slate">Chargement...</p>}
+      {isLoading && <p className="text-sm text-slate">{t.common.loading}</p>}
 
       {isError && (
-        <p className="rounded-md bg-danger/[0.08] px-3 py-2.5 text-sm font-semibold text-danger">
-          Impossible de charger vos devis pour le moment.
-        </p>
+        <p className="rounded-md bg-danger/[0.08] px-3 py-2.5 text-sm font-semibold text-danger">{l.error}</p>
       )}
 
       {devis && devis.length === 0 && (
         <Card radius="lg" padding="md" shadow="none" className="border-[1.5px] border-dashed border-navy/15">
-          <p className="text-sm text-slate">
-            Vous n&apos;avez pas encore de devis. Utilisez le bouton &laquo;&nbsp;Demander un devis&nbsp;&raquo; en
-            bas à droite pour en créer un.
-          </p>
+          <p className="text-sm text-slate">{l.emptyPrefix}</p>
         </Card>
       )}
 
@@ -55,7 +53,7 @@ function MyDevisList() {
                     })}
                   </div>
                 </div>
-                <Badge variant={statusBadgeVariant[d.status]}>{statusLabels[d.status]}</Badge>
+                <Badge variant={statusBadgeVariant[d.status]}>{t.devisStatus[d.status]}</Badge>
               </Card>
             </Link>
           ))}

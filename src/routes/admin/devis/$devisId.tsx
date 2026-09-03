@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { Badge, Button, Card, Select, Textarea } from '@/components/ui'
-import { statusBadgeVariant, statusLabels } from '@/features/account/status'
+import { statusBadgeVariant } from '@/features/account/status'
 import { useAuth } from '@/features/auth/AuthContext'
 import { generateDevisPdf } from '@/features/admin/generateDevisPdf'
 import {
@@ -11,6 +11,7 @@ import {
   useDevisNotes,
   useUpdateDevisStatus,
 } from '@/features/admin/queries'
+import { useLocale } from '@/i18n/LocaleContext'
 import type { DevisStatus } from '@/lib/database.types'
 import { Route as AdminRoute } from '@/routes/admin/route'
 
@@ -31,6 +32,7 @@ function Field({ label, value }: { label: string; value: string | null | undefin
 
 function AttachmentRow({ path }: { path: string }) {
   const [loading, setLoading] = useState(false)
+  const { t } = useLocale()
   const label = path.replace(/^[0-9a-f-]{36}-/i, '')
 
   async function handleOpen() {
@@ -49,7 +51,7 @@ function AttachmentRow({ path }: { path: string }) {
     <div className="flex items-center justify-between gap-3 rounded-md bg-surface px-3 py-2 text-sm">
       <span className="truncate font-semibold text-ink">{label}</span>
       <button type="button" onClick={handleOpen} disabled={loading} className="flex-none text-xs font-bold text-primary">
-        {loading ? 'Ouverture...' : 'Télécharger'}
+        {loading ? t.admin.devisDetail.opening : t.admin.devisDetail.download}
       </button>
     </div>
   )
@@ -60,6 +62,8 @@ function AdminDevisDetail() {
   const { adminUser } = AdminRoute.useRouteContext()
   const { user } = useAuth()
   const canEdit = adminUser.role === 'Admin' || adminUser.role === 'Agent'
+  const { t } = useLocale()
+  const d = t.admin.devisDetail
 
   const { data: devis, isLoading, isError } = useAdminDevisDetail(devisId)
   const { data: notes } = useDevisNotes(devisId)
@@ -79,19 +83,15 @@ function AdminDevisDetail() {
   return (
     <div>
       <Link to="/admin/devis" className="mb-6 inline-flex items-center gap-1.5 text-sm font-bold text-ink">
-        ← Devis
+        {d.back}
       </Link>
 
-      {isLoading && <p className="text-sm text-slate">Chargement...</p>}
+      {isLoading && <p className="text-sm text-slate">{d.loading}</p>}
       {isError && (
-        <p className="rounded-md bg-danger/[0.08] px-3 py-2.5 text-sm font-semibold text-danger">
-          Impossible de charger ce devis.
-        </p>
+        <p className="rounded-md bg-danger/[0.08] px-3 py-2.5 text-sm font-semibold text-danger">{d.error}</p>
       )}
       {!isLoading && !isError && !devis && (
-        <p className="rounded-md bg-danger/[0.08] px-3 py-2.5 text-sm font-semibold text-danger">
-          Ce devis n&apos;existe pas.
-        </p>
+        <p className="rounded-md bg-danger/[0.08] px-3 py-2.5 text-sm font-semibold text-danger">{d.notFound}</p>
       )}
 
       {devis && (
@@ -103,44 +103,44 @@ function AdminDevisDetail() {
                   {devis.op_type} — {devis.category}
                 </h1>
                 <div className="flex items-center gap-2">
-                  <Badge variant={statusBadgeVariant[devis.status]}>{statusLabels[devis.status]}</Badge>
+                  <Badge variant={statusBadgeVariant[devis.status]}>{t.devisStatus[devis.status]}</Badge>
                   <Button variant="ghost" size="sm" onClick={() => generateDevisPdf(devis)}>
-                    Télécharger le PDF
+                    {d.downloadPdf}
                   </Button>
                 </div>
               </div>
 
               <div className="divide-y divide-navy/[0.08]">
                 <Field
-                  label="Date de la demande"
+                  label={d.date}
                   value={new Date(devis.created_at).toLocaleDateString('fr-FR', {
                     day: 'numeric',
                     month: 'long',
                     year: 'numeric',
                   })}
                 />
-                <Field label="Client" value={devis.name} />
-                <Field label="Email" value={devis.email} />
-                <Field label="WhatsApp" value={devis.whatsapp} />
-                <Field label="Quantité" value={devis.quantity} />
-                <Field label="Budget" value={devis.budget} />
-                <Field label="Pays de livraison" value={devis.country} />
-                <Field label="Transport" value={devis.transport} />
-                <Field label="Origine" value={devis.source_page} />
+                <Field label={d.client} value={devis.name} />
+                <Field label={d.email} value={devis.email} />
+                <Field label={d.whatsapp} value={devis.whatsapp} />
+                <Field label={d.quantity} value={devis.quantity} />
+                <Field label={d.budget} value={devis.budget} />
+                <Field label={d.country} value={devis.country} />
+                <Field label={d.transport} value={devis.transport} />
+                <Field label={d.origin} value={devis.source_page} />
               </div>
 
               <div className="mt-4">
-                <p className="mb-1 text-xs font-bold text-ink">Description du besoin</p>
+                <p className="mb-1 text-xs font-bold text-ink">{d.descriptionTitle}</p>
                 <p className="rounded-xl bg-surface p-4 text-sm leading-[1.6] text-slate">{devis.description}</p>
               </div>
             </Card>
 
             <Card radius="lg" padding="md" shadow="none" className="border-[1.5px] border-navy/[0.08]">
               <h2 className="mb-4 text-base font-extrabold text-ink">
-                Pièces jointes {devis.attachment_paths.length > 0 && `(${devis.attachment_paths.length})`}
+                {d.attachmentsTitle} {devis.attachment_paths.length > 0 && `(${devis.attachment_paths.length})`}
               </h2>
               {devis.attachment_paths.length === 0 ? (
-                <p className="text-sm text-slate">Aucune pièce jointe.</p>
+                <p className="text-sm text-slate">{d.noAttachments}</p>
               ) : (
                 <div className="flex flex-col gap-2">
                   {devis.attachment_paths.map((path) => (
@@ -153,7 +153,7 @@ function AdminDevisDetail() {
 
           <div className="flex flex-col gap-6">
             <Card radius="lg" padding="md" shadow="none" className="border-[1.5px] border-navy/[0.08]">
-              <h2 className="mb-3 text-base font-extrabold text-ink">Statut</h2>
+              <h2 className="mb-3 text-base font-extrabold text-ink">{d.statusTitle}</h2>
               <Select
                 value={devis.status}
                 disabled={!canEdit || updateStatus.isPending}
@@ -161,25 +161,25 @@ function AdminDevisDetail() {
               >
                 {allStatuses.map((s) => (
                   <option key={s} value={s}>
-                    {statusLabels[s]}
+                    {t.devisStatus[s]}
                   </option>
                 ))}
               </Select>
-              {!canEdit && <p className="mt-2 text-xs text-slate">Lecture seule — vous ne pouvez pas modifier le statut.</p>}
+              {!canEdit && <p className="mt-2 text-xs text-slate">{d.readOnlyNotice}</p>}
               {updateStatus.isError && (
-                <p className="mt-2 text-xs font-semibold text-danger">Échec de la mise à jour du statut.</p>
+                <p className="mt-2 text-xs font-semibold text-danger">{d.statusUpdateError}</p>
               )}
             </Card>
 
             <Card radius="lg" padding="md" shadow="none" className="border-[1.5px] border-navy/[0.08]">
-              <h2 className="mb-4 text-base font-extrabold text-ink">Notes internes</h2>
+              <h2 className="mb-4 text-base font-extrabold text-ink">{d.notesTitle}</h2>
 
               {canEdit && (
                 <div className="mb-4 flex flex-col gap-2">
                   <Textarea
                     value={noteBody}
                     onChange={(e) => setNoteBody(e.target.value)}
-                    placeholder="Ajouter une note visible par l'équipe uniquement..."
+                    placeholder={d.notePlaceholder}
                     rows={3}
                   />
                   <Button
@@ -189,13 +189,13 @@ function AdminDevisDetail() {
                     disabled={!noteBody.trim() || addNote.isPending}
                     className="self-end"
                   >
-                    {addNote.isPending ? 'Ajout...' : 'Ajouter la note'}
+                    {addNote.isPending ? d.noteAdding : d.noteAdd}
                   </Button>
                 </div>
               )}
 
               {!notes || notes.length === 0 ? (
-                <p className="text-sm text-slate">Aucune note pour le moment.</p>
+                <p className="text-sm text-slate">{d.noNotes}</p>
               ) : (
                 <div className="flex flex-col gap-3">
                   {notes.map((note) => (

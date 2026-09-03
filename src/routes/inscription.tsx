@@ -3,6 +3,7 @@ import { type FormEvent, useState } from 'react'
 import { AuthShell } from '@/components/sections/auth/AuthShell'
 import { Button, Input, Label } from '@/components/ui'
 import { useAuth } from '@/features/auth/AuthContext'
+import { useLocale } from '@/i18n/LocaleContext'
 
 export const Route = createFileRoute('/inscription')({
   component: Inscription,
@@ -11,6 +12,8 @@ export const Route = createFileRoute('/inscription')({
 function Inscription() {
   const { signUp } = useAuth()
   const navigate = useNavigate()
+  const { t } = useLocale()
+  const i = t.auth.inscription
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -24,11 +27,11 @@ function Inscription() {
     setError(null)
 
     if (password.length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractères.')
+      setError(i.passwordTooShort)
       return
     }
     if (password !== confirmPassword) {
-      setError('Les mots de passe ne correspondent pas.')
+      setError(i.passwordMismatch)
       return
     }
 
@@ -49,17 +52,16 @@ function Inscription() {
 
   if (needsConfirmation) {
     return (
-      <AuthShell title="Vérifiez votre email" subtitle="Une dernière étape avant d'accéder à votre compte.">
+      <AuthShell title={i.confirmTitle} subtitle={i.confirmSubtitle}>
         <div className="rounded-xl bg-gradient-primary-diag p-8 text-center text-white">
           <div className="mb-3 text-4xl">✓</div>
           <p className="text-white/90">
-            Un email de confirmation a été envoyé à <strong>{email}</strong>. Cliquez sur le lien qu&apos;il contient
-            pour activer votre compte, puis connectez-vous.
+            {i.confirmBodyPrefix} <strong>{email}</strong>. {i.confirmBodySuffix}
           </p>
         </div>
         <p className="mt-6 text-center text-sm text-slate">
           <Link to="/connexion" className="font-bold text-primary">
-            Aller à la connexion
+            {i.goToLogin}
           </Link>
         </p>
       </AuthShell>
@@ -67,10 +69,10 @@ function Inscription() {
   }
 
   return (
-    <AuthShell title="Créer un compte" subtitle="Suivez vos devis et accédez à vos infos de paiement en un clic.">
+    <AuthShell title={i.title} subtitle={i.subtitle}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-[18px]">
         <div>
-          <Label>Email</Label>
+          <Label>{i.email}</Label>
           <Input
             type="email"
             required
@@ -80,18 +82,18 @@ function Inscription() {
           />
         </div>
         <div>
-          <Label>Mot de passe</Label>
+          <Label>{i.password}</Label>
           <Input
             type="password"
             required
             minLength={6}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="6 caractères minimum"
+            placeholder={i.passwordPlaceholder}
           />
         </div>
         <div>
-          <Label>Confirmer le mot de passe</Label>
+          <Label>{i.confirmPassword}</Label>
           <Input
             type="password"
             required
@@ -106,14 +108,14 @@ function Inscription() {
         )}
 
         <Button type="submit" variant="accent" size="lg" disabled={loading} className="mt-2 w-full font-extrabold">
-          {loading ? 'Création...' : 'Créer mon compte'}
+          {loading ? i.submitting : i.submit}
         </Button>
       </form>
 
       <p className="mt-6 text-center text-sm text-slate">
-        Déjà un compte ?{' '}
+        {i.alreadyAccount}{' '}
         <Link to="/connexion" className="font-bold text-primary">
-          Connectez-vous
+          {i.loginLink}
         </Link>
       </p>
     </AuthShell>

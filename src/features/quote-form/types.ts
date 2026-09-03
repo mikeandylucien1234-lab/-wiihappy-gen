@@ -3,13 +3,8 @@ export type TransportType = 'Aérien' | 'Maritime'
 
 export const STEP_COUNT = 5
 
-export const STEPS = [
-  { id: 1, label: "Type d'opération" },
-  { id: 2, label: 'Coordonnées' },
-  { id: 3, label: 'Détails du besoin' },
-  { id: 4, label: 'Livraison' },
-  { id: 5, label: 'Récapitulatif' },
-] as const
+/** Step ids only — labels are localized, see t.quoteSteps.labels (same order/count). */
+export const STEPS = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }] as const
 
 export interface QuoteFormData {
   opType: OperationType

@@ -6,6 +6,7 @@ import { ServiceCta } from '@/components/sections/service/ServiceCta'
 import { ServiceHero } from '@/components/sections/service/ServiceHero'
 import { ServiceSteps } from '@/components/sections/service/ServiceSteps'
 import { getServiceBySlug } from '@/features/services/data'
+import { useLocale } from '@/i18n/LocaleContext'
 
 export const Route = createFileRoute('/services/$slug')({
   loader: ({ params }) => {
@@ -33,11 +34,12 @@ function ServicePage() {
 }
 
 function ServiceNotFound() {
+  const { t } = useLocale()
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-surface font-sans text-ink">
-      <p className="text-body text-slate">Ce service n&apos;existe pas.</p>
+      <p className="text-body text-slate">{t.servicePages.notFound}</p>
       <Link to="/services" className="text-sm font-bold text-primary">
-        ← Voir tous les services
+        {t.servicePages.backToServices}
       </Link>
     </div>
   )

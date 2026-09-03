@@ -1,8 +1,10 @@
 import { Link } from '@tanstack/react-router'
 import { useUnreadNotificationsCount } from '@/features/admin/notifications'
+import { useLocale } from '@/i18n/LocaleContext'
 
 export function AdminHeader({ name }: { name: string }) {
   const { data: unreadCount } = useUnreadNotificationsCount()
+  const { t } = useLocale()
   const initials = name
     .split(' ')
     .map((w) => w[0])
@@ -26,7 +28,7 @@ export function AdminHeader({ name }: { name: string }) {
           <path d="M21 21l-4.3-4.3" />
         </svg>
         <input
-          placeholder="Rechercher..."
+          placeholder={t.admin.header.searchPlaceholder}
           className="w-full rounded-md border-[1.5px] border-navy/10 bg-surface py-2.5 pl-[38px] pr-3.5 text-sm text-ink placeholder:text-slate focus:outline-none focus:border-primary/60"
         />
       </div>

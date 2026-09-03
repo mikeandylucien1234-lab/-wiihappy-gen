@@ -3,6 +3,7 @@ import { type FormEvent, useState } from 'react'
 import { AuthShell } from '@/components/sections/auth/AuthShell'
 import { Button, Input, Label } from '@/components/ui'
 import { useAuth } from '@/features/auth/AuthContext'
+import { useLocale } from '@/i18n/LocaleContext'
 
 type ConnexionSearch = { redirect?: string }
 
@@ -17,6 +18,8 @@ function Connexion() {
   const { signIn } = useAuth()
   const navigate = useNavigate()
   const { redirect } = Route.useSearch()
+  const { t } = useLocale()
+  const c = t.auth.connexion
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -30,21 +33,17 @@ function Connexion() {
     const { error } = await signIn(email.trim(), password)
     setLoading(false)
     if (error) {
-      setError(
-        error === 'Invalid login credentials'
-          ? 'Email ou mot de passe incorrect.'
-          : error,
-      )
+      setError(error === 'Invalid login credentials' ? c.invalidCredentials : error)
       return
     }
     navigate({ to: redirect || '/mon-compte' })
   }
 
   return (
-    <AuthShell title="Connexion" subtitle="Accédez à votre espace client pour suivre vos devis.">
+    <AuthShell title={c.title} subtitle={c.subtitle}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-[18px]">
         <div>
-          <Label>Email</Label>
+          <Label>{c.email}</Label>
           <Input
             type="email"
             required
@@ -54,7 +53,7 @@ function Connexion() {
           />
         </div>
         <div>
-          <Label>Mot de passe</Label>
+          <Label>{c.password}</Label>
           <Input
             type="password"
             required
@@ -69,14 +68,14 @@ function Connexion() {
         )}
 
         <Button type="submit" variant="accent" size="lg" disabled={loading} className="mt-2 w-full font-extrabold">
-          {loading ? 'Connexion...' : 'Se connecter'}
+          {loading ? c.submitting : c.submit}
         </Button>
       </form>
 
       <p className="mt-6 text-center text-sm text-slate">
-        Pas encore de compte ?{' '}
+        {c.noAccount}{' '}
         <Link to="/inscription" className="font-bold text-primary">
-          Inscrivez-vous
+          {c.signUpLink}
         </Link>
       </p>
     </AuthShell>

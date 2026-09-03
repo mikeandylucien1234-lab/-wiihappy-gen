@@ -1,13 +1,10 @@
 import { Link } from '@tanstack/react-router'
 import { Logo } from '@/components/ui'
+import { useLocale } from '@/i18n/LocaleContext'
+import { cn } from '@/lib/cn'
+import type { Locale } from '@/lib/database.types'
 
-const navLinks = [
-  { label: 'Accueil', hash: 'hero' },
-  { label: 'Services', hash: 'services' },
-  { label: 'Comment ça marche', hash: 'comment' },
-  { label: 'Catégories', hash: 'categories' },
-  { label: 'FAQ', hash: 'faq' },
-]
+const locales: Locale[] = ['fr', 'en', 'es']
 
 const socialIcons = [
   {
@@ -25,18 +22,26 @@ const socialIcons = [
 ]
 
 export function Footer() {
+  const { locale, setLocale, t } = useLocale()
+
+  const navLinks = [
+    { label: t.footer.navHome, hash: 'hero' },
+    { label: t.footer.navServices, hash: 'services' },
+    { label: t.footer.navComment, hash: 'comment' },
+    { label: t.footer.navCategories, hash: 'categories' },
+    { label: t.footer.navFaq, hash: 'faq' },
+  ]
+
   return (
     <footer id="footer" className="mt-24 bg-gradient-footer px-6 pb-[30px] pt-[70px] text-white/85">
       <div className="mx-auto grid max-w-content grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-10 border-b border-white/15 pb-10">
         <div>
           <Logo variant="light" className="mb-[14px]" />
-          <p className="text-sm leading-[1.6] text-white/65">
-            Courtage et sourcing international — véhicules, agroalimentaire, textile, électronique.
-          </p>
+          <p className="text-sm leading-[1.6] text-white/65">{t.footer.tagline}</p>
         </div>
 
         <div>
-          <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">Navigation</h5>
+          <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">{t.footer.navTitle}</h5>
           <div className="flex flex-col gap-2.5">
             {navLinks.map((link) => (
               <Link key={link.hash} to="/" hash={link.hash} className="text-[14.5px] text-white/75">
@@ -47,16 +52,16 @@ export function Footer() {
         </div>
 
         <div>
-          <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">Contact</h5>
+          <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">{t.footer.contactTitle}</h5>
           <div className="flex flex-col gap-2.5 text-[14.5px] text-white/75">
-            <span>contact@wiihappy.com</span>
-            <span>WhatsApp +56 9 123 456</span>
-            <span>Lun-Sam 08:00 - 20:00</span>
+            <span>{t.footer.contactEmail}</span>
+            <span>{t.footer.contactWhatsapp}</span>
+            <span>{t.footer.contactHours}</span>
           </div>
         </div>
 
         <div>
-          <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">Suivez-nous</h5>
+          <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">{t.footer.followTitle}</h5>
           <div className="mb-5 flex gap-3">
             {socialIcons.map((icon) => (
               <a
@@ -72,16 +77,25 @@ export function Footer() {
             ))}
           </div>
           <div className="flex gap-2">
-            <span className="rounded-md bg-white/[0.15] px-2.5 py-[5px] text-xs font-bold">FR</span>
-            <span className="rounded-md bg-white/[0.06] px-2.5 py-[5px] text-xs font-bold text-white/50">EN</span>
-            <span className="rounded-md bg-white/[0.06] px-2.5 py-[5px] text-xs font-bold text-white/50">ES</span>
+            {locales.map((l) => (
+              <button
+                key={l}
+                type="button"
+                onClick={() => setLocale(l)}
+                aria-current={locale === l}
+                className={cn(
+                  'rounded-md px-2.5 py-[5px] text-xs font-bold uppercase transition-colors',
+                  locale === l ? 'bg-white/[0.15] text-white' : 'bg-white/[0.06] text-white/50',
+                )}
+              >
+                {l}
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
-      <p className="mx-auto mt-6 max-w-content text-center text-[13px] text-white/50">
-        © 2026 Wiihappy Gen. Tous droits réservés.
-      </p>
+      <p className="mx-auto mt-6 max-w-content text-center text-[13px] text-white/50">{t.footer.copyright}</p>
     </footer>
   )
 }

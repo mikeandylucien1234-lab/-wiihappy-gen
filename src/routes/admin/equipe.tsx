@@ -9,6 +9,7 @@ import {
   useTeamRoster,
   useUpdateTeamMember,
 } from '@/features/admin/team'
+import { useLocale } from '@/i18n/LocaleContext'
 import type { AdminRole } from '@/lib/database.types'
 import { cn } from '@/lib/cn'
 import { Route as AdminRoute } from '@/routes/admin/route'
@@ -24,11 +25,7 @@ const avatarGradients = [
   'bg-gradient-avatar-neutral',
 ]
 
-const roleOptions: { role: AdminRole; description: string }[] = [
-  { role: 'Admin', description: "Accès complet : gestion de l'équipe, paramètres, paiements, contenu et devis." },
-  { role: 'Agent', description: 'Peut traiter les devis, gérer les clients et consulter les statistiques.' },
-  { role: 'Lecture seule', description: 'Peut uniquement consulter les devis et statistiques, sans modification.' },
-]
+const roleValues: AdminRole[] = ['Admin', 'Agent', 'Lecture seule']
 
 function initialsOf(name: string) {
   return name.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase()
@@ -39,6 +36,8 @@ function InviteModal({ onClose }: { onClose: () => void }) {
   const sendInvite = useSendInvite()
   const [email, setEmail] = useState('')
   const [role, setRole] = useState<AdminRole>('Agent')
+  const { t } = useLocale()
+  const e = t.admin.equipe
 
   function handleSend() {
     if (!email.trim() || !user) return
@@ -48,47 +47,47 @@ function InviteModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center bg-primary-dark/45 p-5" onClick={onClose}>
       <div
-        onClick={(e) => e.stopPropagation()}
+        onClick={(ev) => ev.stopPropagation()}
         className="w-full max-w-[460px] rounded-2xl bg-white p-[30px] shadow-modal"
       >
-        <h3 className="mb-5 text-lg font-extrabold text-ink">Inviter un membre</h3>
+        <h3 className="mb-5 text-lg font-extrabold text-ink">{e.modalTitle}</h3>
 
         <div className="mb-4">
-          <Label>Email</Label>
+          <Label>{e.emailLabel}</Label>
           <Input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="prenom.nom@wiihappy.com"
+            onChange={(ev) => setEmail(ev.target.value)}
+            placeholder={e.emailPlaceholder}
           />
         </div>
 
-        <Label className="mb-2">Rôle</Label>
+        <Label className="mb-2">{e.roleLabel}</Label>
         <div className="mb-[22px] flex flex-col gap-2.5">
-          {roleOptions.map((opt) => (
+          {roleValues.map((r) => (
             <button
-              key={opt.role}
+              key={r}
               type="button"
-              onClick={() => setRole(opt.role)}
+              onClick={() => setRole(r)}
               className={cn(
                 'rounded-md border-[1.5px] p-3.5 text-left font-sans transition-colors',
-                role === opt.role ? 'border-primary bg-primary/5' : 'border-navy/[0.12] bg-white',
+                role === r ? 'border-primary bg-primary/5' : 'border-navy/[0.12] bg-white',
               )}
             >
-              <div className="mb-0.5 text-sm font-extrabold text-ink">{opt.role}</div>
-              <div className="text-xs text-slate">{opt.description}</div>
+              <div className="mb-0.5 text-sm font-extrabold text-ink">{e.roleLabels[r]}</div>
+              <div className="text-xs text-slate">{e.roleDescriptions[r]}</div>
             </button>
           ))}
         </div>
 
-        {sendInvite.isError && <p className="mb-3 text-sm font-semibold text-danger">Échec de l&apos;invitation.</p>}
+        {sendInvite.isError && <p className="mb-3 text-sm font-semibold text-danger">{e.inviteError}</p>}
 
         <div className="flex justify-end gap-2.5">
           <Button type="button" variant="ghost" size="sm" onClick={onClose}>
-            Annuler
+            {e.cancel}
           </Button>
           <Button type="button" variant="accent" size="sm" onClick={handleSend} disabled={!email.trim() || sendInvite.isPending}>
-            {sendInvite.isPending ? 'Envoi...' : "Envoyer l'invitation"}
+            {sendInvite.isPending ? e.sending : e.sendInvite}
           </Button>
         </div>
       </div>
@@ -99,6 +98,8 @@ function InviteModal({ onClose }: { onClose: () => void }) {
 function AdminEquipe() {
   const { adminUser } = AdminRoute.useRouteContext()
   const canManage = adminUser.role === 'Admin'
+  const { t } = useLocale()
+  const e = t.admin.equipe
 
   const { data: members, isLoading } = useTeamRoster()
   const { data: invites } = usePendingInvites()
@@ -109,27 +110,27 @@ function AdminEquipe() {
   return (
     <div>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-extrabold tracking-[-0.5px] text-ink">Équipe & rôles</h1>
+        <h1 className="text-2xl font-extrabold tracking-[-0.5px] text-ink">{e.title}</h1>
         {canManage && (
           <Button variant="accent" size="md" onClick={() => setInviteOpen(true)}>
-            + Inviter un membre
+            {e.inviteMember}
           </Button>
         )}
       </div>
 
-      {isLoading && <p className="text-sm text-slate">Chargement...</p>}
+      {isLoading && <p className="text-sm text-slate">{e.loading}</p>}
 
       {members && (
         <div className="overflow-hidden rounded-lg bg-white shadow-card">
           <div className="overflow-x-auto">
             <div className="min-w-[820px]">
               <div className="grid grid-cols-[0.6fr_1.3fr_1.5fr_0.9fr_0.8fr_1.1fr] gap-3 border-b border-navy/[0.08] px-5 py-3.5 text-xs font-extrabold uppercase tracking-[0.03em] text-slate">
-                <span>Avatar</span>
-                <span>Nom</span>
-                <span>Email</span>
-                <span>Rôle</span>
-                <span>Statut</span>
-                <span>Action</span>
+                <span>{e.colAvatar}</span>
+                <span>{e.colName}</span>
+                <span>{e.colEmail}</span>
+                <span>{e.colRole}</span>
+                <span>{e.colStatus}</span>
+                <span>{e.colAction}</span>
               </div>
 
               {members.map((m, i) => (
@@ -150,12 +151,14 @@ function AdminEquipe() {
                   <select
                     value={m.role}
                     disabled={!canManage}
-                    onChange={(e) => updateMember.mutate({ id: m.id, role: e.target.value as AdminRole })}
+                    onChange={(ev) => updateMember.mutate({ id: m.id, role: ev.target.value as AdminRole })}
                     className="w-fit rounded-md border-[1.5px] border-navy/[0.12] bg-surface px-2.5 py-1.5 text-xs font-bold text-ink"
                   >
-                    <option value="Admin">Admin</option>
-                    <option value="Agent">Agent</option>
-                    <option value="Lecture seule">Lecture seule</option>
+                    {roleValues.map((r) => (
+                      <option key={r} value={r}>
+                        {e.roleLabels[r]}
+                      </option>
+                    ))}
                   </select>
                   <span
                     className={cn(
@@ -163,7 +166,7 @@ function AdminEquipe() {
                       m.active ? 'bg-success/[0.12] text-success' : 'bg-slate/[0.12] text-slate',
                     )}
                   >
-                    {m.active ? 'Actif' : 'Inactif'}
+                    {m.active ? e.active : e.inactive}
                   </span>
                   {canManage && (
                     <button
@@ -174,7 +177,7 @@ function AdminEquipe() {
                         m.active ? 'border-danger/20 bg-danger/[0.08] text-danger' : 'border-success/25 bg-success/10 text-success',
                       )}
                     >
-                      {m.active ? 'Désactiver' : 'Réactiver'}
+                      {m.active ? e.deactivate : e.reactivate}
                     </button>
                   )}
                 </div>
@@ -186,7 +189,7 @@ function AdminEquipe() {
 
       {invites && invites.length > 0 && (
         <div className="mt-8">
-          <h2 className="mb-3 text-base font-extrabold text-ink">Invitations en attente</h2>
+          <h2 className="mb-3 text-base font-extrabold text-ink">{e.pendingInvitesTitle}</h2>
           <div className="flex flex-col gap-2">
             {invites.map((inv) => (
               <div
@@ -194,10 +197,10 @@ function AdminEquipe() {
                 className="flex items-center justify-between gap-3 rounded-lg bg-white px-5 py-3 text-[13.5px] shadow-card"
               >
                 <span className="font-semibold text-ink">{inv.email}</span>
-                <span className="text-slate">{inv.role}</span>
+                <span className="text-slate">{e.roleLabels[inv.role]}</span>
                 {canManage && (
                   <button type="button" onClick={() => revokeInvite.mutate(inv.email)} className="text-xs font-bold text-danger">
-                    Annuler
+                    {e.cancelInvite}
                   </button>
                 )}
               </div>

@@ -1,4 +1,5 @@
 import { ImagePlaceholder } from '@/components/ui'
+import { useLocale } from '@/i18n/LocaleContext'
 
 const avatarStack = [
   'bg-gradient-primary-diag',
@@ -7,28 +8,28 @@ const avatarStack = [
 ]
 
 export function Hero() {
+  const { t } = useLocale()
+
   return (
     <section id="hero" className="mx-auto max-w-content px-6 pt-14">
       <div className="flex flex-wrap items-center gap-14">
         <div className="min-w-[340px] flex-1">
-          <div className="mb-[18px] text-eyebrow text-primary">SOURCING &amp; LOGISTIQUE INTERNATIONALE</div>
+          <div className="mb-[18px] text-eyebrow text-primary">{t.hero.eyebrow}</div>
           <h1 className="mb-[22px] text-hero text-ink">
-            Développons votre business
-            <br />à l&apos;international
+            {t.hero.titleLine1}
             <br />
-            avec un partenaire
+            {t.hero.titleLine2}
             <br />
-            <span className="bg-gradient-primary bg-clip-text text-transparent">de confiance</span>
+            {t.hero.titleLine3}
+            <br />
+            <span className="bg-gradient-primary bg-clip-text text-transparent">{t.hero.titleHighlight}</span>
           </h1>
-          <p className="mb-8 max-w-[480px] text-body-lg text-slate">
-            Sourcing fiable de produits en Chine et à l&apos;international — véhicules, alimentation, textile,
-            électronique. De la vérification fournisseur jusqu&apos;à la livraison.
-          </p>
+          <p className="mb-8 max-w-[480px] text-body-lg text-slate">{t.hero.paragraph}</p>
         </div>
 
         <div className="relative min-w-[340px] flex-1">
           <div className="h-[440px] overflow-hidden rounded-3xl">
-            <ImagePlaceholder shape="rect" label="Photo réaliste : avion cargo, globe, camion et conteneurs" />
+            <ImagePlaceholder shape="rect" label={t.hero.imageLabel} />
           </div>
           <div className="absolute -left-6 bottom-6 flex items-center gap-3 rounded-[18px] bg-white p-[14px_20px] shadow-[0_14px_36px_rgba(10,42,102,0.18)]">
             <div className="flex">
@@ -40,8 +41,8 @@ export function Hero() {
               ))}
             </div>
             <div className="text-[13.5px] leading-tight">
-              <div className="font-extrabold text-ink">500+</div>
-              <div className="text-xs text-slate">clients nous font confiance</div>
+              <div className="font-extrabold text-ink">{t.hero.trustCount}</div>
+              <div className="text-xs text-slate">{t.hero.trustLabel}</div>
             </div>
           </div>
         </div>

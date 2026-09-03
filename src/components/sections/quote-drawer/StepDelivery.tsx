@@ -1,41 +1,43 @@
 import { Input, Label } from '@/components/ui'
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
+import { useLocale } from '@/i18n/LocaleContext'
 import { TogglePill } from './TogglePill'
 
 export function StepDelivery() {
   const { form, setField } = useQuoteForm()
+  const { t } = useLocale()
 
   return (
     <div>
-      <h3 className="mb-1 text-lg font-extrabold text-ink">Livraison</h3>
-      <p className="mb-6 text-sm text-slate">Où et comment souhaitez-vous recevoir votre marchandise ?</p>
+      <h3 className="mb-1 text-lg font-extrabold text-ink">{t.quoteSteps.delivery.title}</h3>
+      <p className="mb-6 text-sm text-slate">{t.quoteSteps.delivery.subtitle}</p>
 
       <div className="flex flex-col gap-[18px]">
         <div>
-          <Label>Pays / adresse de livraison</Label>
+          <Label>{t.quoteSteps.delivery.country}</Label>
           <Input
             value={form.country}
             onChange={(e) => setField('country', e.target.value)}
-            placeholder="Pays, ville"
+            placeholder={t.quoteSteps.delivery.countryPlaceholder}
           />
         </div>
 
         <div>
-          <Label className="mb-2">Mode de transport préféré</Label>
+          <Label className="mb-2">{t.quoteSteps.delivery.transport}</Label>
           <div className="flex gap-3">
             <TogglePill
               active={form.transport === 'Aérien'}
               gradient="bg-gradient-accent"
               onClick={() => setField('transport', 'Aérien')}
             >
-              Aérien
+              {t.quoteSteps.delivery.transportAerien}
             </TogglePill>
             <TogglePill
               active={form.transport === 'Maritime'}
               gradient="bg-gradient-accent"
               onClick={() => setField('transport', 'Maritime')}
             >
-              Maritime
+              {t.quoteSteps.delivery.transportMaritime}
             </TogglePill>
           </div>
         </div>

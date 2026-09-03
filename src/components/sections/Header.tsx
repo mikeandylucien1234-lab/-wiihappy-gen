@@ -3,20 +3,25 @@ import { useEffect, useState } from 'react'
 import { Button, Logo } from '@/components/ui'
 import { useAuth } from '@/features/auth/AuthContext'
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
+import { useLocale } from '@/i18n/LocaleContext'
 import { cn } from '@/lib/cn'
+import type { Locale } from '@/lib/database.types'
 
-const navItems = [
-  { label: 'Services', hash: 'services' },
-  { label: 'Comment ça marche', hash: 'comment' },
-  { label: 'Catégories', hash: 'categories' },
-  { label: 'FAQ', hash: 'faq' },
-  { label: 'Contact', hash: 'footer' },
-]
+const locales: Locale[] = ['fr', 'en', 'es']
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const { openDrawer } = useQuoteForm()
   const { user } = useAuth()
+  const { locale, setLocale, t } = useLocale()
+
+  const navItems = [
+    { label: t.header.navServices, hash: 'services' },
+    { label: t.header.navComment, hash: 'comment' },
+    { label: t.header.navCategories, hash: 'categories' },
+    { label: t.header.navFaq, hash: 'faq' },
+    { label: t.header.navContact, hash: 'footer' },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -39,7 +44,7 @@ export function Header() {
         <nav className="mx-auto flex flex-wrap items-start gap-[26px]">
           <div className="flex flex-col items-center gap-1.5">
             <Link to="/" hash="hero" className="whitespace-nowrap text-[14.5px] font-bold text-ink">
-              Accueil
+              {t.header.home}
             </Link>
             <div className="h-[5px] w-[5px] rounded-full bg-accent" />
           </div>
@@ -56,6 +61,22 @@ export function Header() {
         </nav>
 
         <div className="ml-auto flex flex-none items-center gap-[18px]">
+          <div className="hidden items-center gap-1 md:flex">
+            {locales.map((l) => (
+              <button
+                key={l}
+                type="button"
+                onClick={() => setLocale(l)}
+                aria-current={locale === l}
+                className={cn(
+                  'rounded-md px-2 py-1 text-xs font-bold uppercase transition-colors',
+                  locale === l ? 'bg-primary/10 text-primary' : 'text-slate',
+                )}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
           <Link
             to={user ? '/mon-compte' : '/connexion'}
             className="hidden items-center gap-1.5 whitespace-nowrap text-[13.5px] font-bold text-ink sm:flex"
@@ -64,14 +85,14 @@ export function Header() {
               <circle cx="12" cy="8" r="4" />
               <path d="M4 21c0-4 3.6-6 8-6s8 2 8 6" />
             </svg>
-            {user ? 'Mon compte' : 'Connexion'}
+            {user ? t.header.myAccount : t.header.login}
           </Link>
           <div className="hidden text-[13.5px] leading-tight text-ink md:block">
-            <div className="font-extrabold">56 9 12567898</div>
-            <div className="text-xs text-slate">Lun-Sam 08:00 - 20:00</div>
+            <div className="font-extrabold">{t.header.phone}</div>
+            <div className="text-xs text-slate">{t.header.hours}</div>
           </div>
           <Button variant="accent" onClick={() => openDrawer()} className="flex-none whitespace-nowrap">
-            Demander un devis <span>→</span>
+            {t.header.ctaQuote} <span>→</span>
           </Button>
         </div>
       </div>

@@ -1,20 +1,22 @@
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
+import { useLocale } from '@/i18n/LocaleContext'
 
 export function QuoteFab() {
   const { drawerOpen, toggleDrawer, showTooltip, showBadge } = useQuoteForm()
+  const { t } = useLocale()
 
   return (
     <div className="fixed bottom-7 right-7 z-[200] flex flex-col items-end gap-2.5">
       {showTooltip && (
         <div className="whitespace-nowrap rounded-xl bg-ink px-4 py-2.5 text-[13.5px] font-semibold text-white shadow-[0_8px_20px_rgba(10,42,102,0.25)]">
-          Demander un devis
+          {t.quoteFab.tooltip}
         </div>
       )}
 
       <button
         type="button"
         onClick={toggleDrawer}
-        aria-label="Demander un devis"
+        aria-label={t.quoteFab.tooltip}
         className="relative flex h-[62px] w-[62px] items-center justify-center rounded-full border-none bg-gradient-fab shadow-fab transition-all duration-200 hover:scale-105 hover:shadow-[0_14px_36px_rgba(10,42,102,0.42)]"
       >
         {drawerOpen ? (

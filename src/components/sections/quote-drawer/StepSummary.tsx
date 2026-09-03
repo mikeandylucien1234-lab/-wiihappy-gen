@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui'
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
+import { useLocale } from '@/i18n/LocaleContext'
 
 function Row({ label, value }: { label: string; value: string }) {
   if (!value) return null
@@ -13,27 +14,29 @@ function Row({ label, value }: { label: string; value: string }) {
 
 export function StepSummary() {
   const { form, isSubmitting, isSubmitError, submitErrorMessage, submit, goToStep } = useQuoteForm()
+  const { t } = useLocale()
+  const s = t.quoteSteps.summary
 
   return (
     <div>
-      <h3 className="mb-1 text-lg font-extrabold text-ink">Récapitulatif</h3>
-      <p className="mb-6 text-sm text-slate">Vérifiez votre demande avant de l&apos;envoyer.</p>
+      <h3 className="mb-1 text-lg font-extrabold text-ink">{s.title}</h3>
+      <p className="mb-6 text-sm text-slate">{s.subtitle}</p>
 
       <div className="divide-y divide-navy/[0.08] rounded-xl bg-surface px-4">
-        <Row label="Type d'opération" value={form.opType} />
-        <Row label="Nom" value={form.name} />
-        <Row label="WhatsApp" value={form.whatsapp} />
-        <Row label="Email" value={form.email} />
-        <Row label="Catégorie" value={form.category} />
-        <Row label="Quantité" value={form.quantity} />
-        <Row label="Budget" value={form.budget} />
-        <Row label="Pays de livraison" value={form.country} />
-        <Row label="Transport" value={form.transport} />
-        <Row label="Pièces jointes" value={form.attachments.length ? `${form.attachments.length} fichier(s)` : ''} />
+        <Row label={s.rowOpType} value={form.opType} />
+        <Row label={s.rowName} value={form.name} />
+        <Row label={s.rowWhatsapp} value={form.whatsapp} />
+        <Row label={s.rowEmail} value={form.email} />
+        <Row label={s.rowCategory} value={form.category} />
+        <Row label={s.rowQuantity} value={form.quantity} />
+        <Row label={s.rowBudget} value={form.budget} />
+        <Row label={s.rowCountry} value={form.country} />
+        <Row label={s.rowTransport} value={form.transport} />
+        <Row label={s.rowAttachments} value={form.attachments.length ? s.attachmentsCount(form.attachments.length) : ''} />
       </div>
 
       <div className="mt-4">
-        <p className="mb-1 text-xs font-bold text-ink">Description du besoin</p>
+        <p className="mb-1 text-xs font-bold text-ink">{s.descriptionTitle}</p>
         <p className="rounded-xl bg-surface p-4 text-sm leading-[1.6] text-slate">{form.description}</p>
       </div>
 
@@ -42,12 +45,12 @@ export function StepSummary() {
         onClick={() => goToStep(1)}
         className="mt-4 text-xs font-bold text-primary underline-offset-2 hover:underline"
       >
-        Modifier ma demande
+        {s.editRequest}
       </button>
 
       {isSubmitError && (
         <p className="mt-4 rounded-md bg-danger/[0.08] px-3 py-2.5 text-sm font-semibold text-danger">
-          {submitErrorMessage ?? "Une erreur est survenue, merci de réessayer."}
+          {submitErrorMessage ?? t.quoteDrawer.genericError}
         </p>
       )}
 
@@ -59,9 +62,9 @@ export function StepSummary() {
         disabled={isSubmitting}
         className="mt-6 w-full font-extrabold"
       >
-        {isSubmitting ? 'Envoi en cours...' : (
+        {isSubmitting ? s.submitting : (
           <>
-            Envoyer ma demande <span>→</span>
+            {s.submit} <span>→</span>
           </>
         )}
       </Button>

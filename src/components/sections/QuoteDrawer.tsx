@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui'
 import { STEP_COUNT } from '@/features/quote-form/types'
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
+import { useLocale } from '@/i18n/LocaleContext'
 import { cn } from '@/lib/cn'
 import { StepContact } from './quote-drawer/StepContact'
 import { StepDelivery } from './quote-drawer/StepDelivery'
@@ -13,6 +14,7 @@ const stepComponents = [StepOperationType, StepContact, StepDetails, StepDeliver
 
 export function QuoteDrawer() {
   const { drawerOpen, closeDrawer, step, stepError, goNext, goBack, submitted, startNewRequest } = useQuoteForm()
+  const { t } = useLocale()
 
   const StepComponent = stepComponents[step - 1]
 
@@ -36,16 +38,14 @@ export function QuoteDrawer() {
         <div className="flex flex-none items-start justify-between px-8 pb-4 pt-9">
           <div>
             <h2 className="text-2xl font-extrabold tracking-[-0.5px] text-ink">
-              {submitted ? 'Demande envoyée' : 'Demander un devis'}
+              {submitted ? t.quoteDrawer.titleSubmitted : t.quoteDrawer.titleDefault}
             </h2>
-            {!submitted && (
-              <p className="mt-1 text-[15px] text-slate">Remplissez ce formulaire, nous revenons vers vous sous 24-48h</p>
-            )}
+            {!submitted && <p className="mt-1 text-[15px] text-slate">{t.quoteDrawer.subtitle}</p>}
           </div>
           <button
             type="button"
             onClick={closeDrawer}
-            aria-label="Fermer"
+            aria-label={t.quoteDrawer.close}
             className="flex h-9 w-9 flex-none items-center justify-center rounded-full border-[1.5px] border-navy/15 bg-white text-base font-bold text-ink"
           >
             ✕
@@ -56,16 +56,14 @@ export function QuoteDrawer() {
           {submitted ? (
             <div className="rounded-xl bg-gradient-primary-diag p-11 text-center text-white">
               <div className="mb-3 text-4xl">✓</div>
-              <h3 className="mb-2 text-xl font-extrabold">Demande envoyée</h3>
-              <p className="mb-6 text-white/85">
-                Merci ! Notre équipe vous contacte sous 24-48h par WhatsApp ou email.
-              </p>
+              <h3 className="mb-2 text-xl font-extrabold">{t.quoteDrawer.confirmationTitle}</h3>
+              <p className="mb-6 text-white/85">{t.quoteDrawer.confirmationBody}</p>
               <button
                 type="button"
                 onClick={startNewRequest}
                 className="rounded-pill border-[1.5px] border-white/40 px-5 py-2.5 text-sm font-bold text-white"
               >
-                Faire une nouvelle demande
+                {t.quoteDrawer.newRequest}
               </button>
             </div>
           ) : (
@@ -83,11 +81,11 @@ export function QuoteDrawer() {
                 <div className="mt-8 flex gap-3">
                   {step > 1 && (
                     <Button type="button" variant="ghost" onClick={goBack} className="flex-1">
-                      Précédent
+                      {t.quoteDrawer.previous}
                     </Button>
                   )}
                   <Button type="button" variant="accent" onClick={goNext} className="flex-1">
-                    Suivant <span>→</span>
+                    {t.quoteDrawer.next} <span>→</span>
                   </Button>
                 </div>
               )}
@@ -97,7 +95,7 @@ export function QuoteDrawer() {
                   onClick={goBack}
                   className="mt-6 text-sm font-bold text-ink"
                 >
-                  ← Précédent
+                  {t.quoteDrawer.previousShort}
                 </button>
               )}
             </>

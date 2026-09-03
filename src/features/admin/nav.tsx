@@ -1,8 +1,7 @@
 import type { ReactNode } from 'react'
 
 export interface AdminNavItem {
-  id: string
-  label: string
+  id: 'dashboard' | 'devis' | 'clients' | 'paiements' | 'categories' | 'contenu' | 'statistiques' | 'equipe' | 'notifications' | 'parametres'
   to: string
   icon: ReactNode
 }
@@ -10,7 +9,6 @@ export interface AdminNavItem {
 export const adminNavItems: AdminNavItem[] = [
   {
     id: 'dashboard',
-    label: 'Dashboard',
     to: '/admin/dashboard',
     icon: (
       <>
@@ -23,7 +21,6 @@ export const adminNavItems: AdminNavItem[] = [
   },
   {
     id: 'devis',
-    label: 'Devis',
     to: '/admin/devis',
     icon: (
       <>
@@ -35,7 +32,6 @@ export const adminNavItems: AdminNavItem[] = [
   },
   {
     id: 'clients',
-    label: 'Clients',
     to: '/admin/clients',
     icon: (
       <>
@@ -48,7 +44,6 @@ export const adminNavItems: AdminNavItem[] = [
   },
   {
     id: 'paiements',
-    label: 'Paiements',
     to: '/admin/paiements',
     icon: (
       <>
@@ -60,7 +55,6 @@ export const adminNavItems: AdminNavItem[] = [
   },
   {
     id: 'categories',
-    label: 'Catégories',
     to: '/admin/categories',
     icon: (
       <>
@@ -73,7 +67,6 @@ export const adminNavItems: AdminNavItem[] = [
   },
   {
     id: 'contenu',
-    label: 'Contenu',
     to: '/admin/contenu',
     icon: (
       <>
@@ -84,13 +77,11 @@ export const adminNavItems: AdminNavItem[] = [
   },
   {
     id: 'statistiques',
-    label: 'Statistiques',
     to: '/admin/statistiques',
     icon: <path d="M4 20V10M11 20V4M18 20v-7" />,
   },
   {
     id: 'equipe',
-    label: 'Équipe & rôles',
     to: '/admin/equipe',
     icon: (
       <>
@@ -103,7 +94,6 @@ export const adminNavItems: AdminNavItem[] = [
   },
   {
     id: 'notifications',
-    label: 'Notifications',
     to: '/admin/notifications',
     icon: (
       <>
@@ -114,7 +104,6 @@ export const adminNavItems: AdminNavItem[] = [
   },
   {
     id: 'parametres',
-    label: 'Paramètres',
     to: '/admin/parametres',
     icon: (
       <>

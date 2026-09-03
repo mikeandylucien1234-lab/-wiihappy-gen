@@ -1,8 +1,10 @@
 import { Link } from '@tanstack/react-router'
 import { adminNavItems } from '@/features/admin/nav'
+import { useLocale } from '@/i18n/LocaleContext'
 import type { AdminRole } from '@/lib/database.types'
 
 export function AdminSidebar({ name, role }: { name: string; role: AdminRole }) {
+  const { t } = useLocale()
   const initials = name
     .split(' ')
     .map((w) => w[0])
@@ -32,7 +34,7 @@ export function AdminSidebar({ name, role }: { name: string; role: AdminRole }) 
                 {item.icon}
               </svg>
             </span>
-            <span className="text-sm">{item.label}</span>
+            <span className="text-sm">{t.admin.nav[item.id]}</span>
           </Link>
         ))}
       </nav>
@@ -43,7 +45,7 @@ export function AdminSidebar({ name, role }: { name: string; role: AdminRole }) 
         </div>
         <div className="min-w-0">
           <div className="truncate text-[13.5px] font-bold text-ink">{name}</div>
-          <div className="text-xs text-slate">{role}</div>
+          <div className="text-xs text-slate">{t.admin.equipe.roleLabels[role]}</div>
         </div>
       </div>
     </aside>

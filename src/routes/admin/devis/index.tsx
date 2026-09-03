@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import { Badge, Select } from '@/components/ui'
-import { statusBadgeVariant, statusLabels } from '@/features/account/status'
+import { statusBadgeVariant } from '@/features/account/status'
 import { useAdminDevisList } from '@/features/admin/queries'
+import { useLocale } from '@/i18n/LocaleContext'
 import type { DevisStatus } from '@/lib/database.types'
 
 export const Route = createFileRoute('/admin/devis/')({
@@ -15,6 +16,8 @@ function AdminDevisList() {
   const { data: devis, isLoading, isError } = useAdminDevisList()
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState<DevisStatus | 'all'>('all')
+  const { t } = useLocale()
+  const l = t.admin.devisList
 
   const filtered = useMemo(() => {
     if (!devis) return []
@@ -33,32 +36,30 @@ function AdminDevisList() {
   return (
     <div>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-extrabold tracking-[-0.5px] text-ink">Devis</h1>
+        <h1 className="text-2xl font-extrabold tracking-[-0.5px] text-ink">{l.title}</h1>
       </div>
 
       <div className="mb-5 flex flex-wrap gap-3">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Rechercher un client, une catégorie..."
+          placeholder={l.searchPlaceholder}
           className="w-full max-w-[320px] rounded-md border-[1.5px] border-navy/10 bg-white px-3.5 py-2.5 text-sm text-ink placeholder:text-slate focus:outline-none focus:border-primary/60"
         />
         <div className="w-full max-w-[220px]">
           <Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as DevisStatus | 'all')}>
             {statusFilters.map((s) => (
               <option key={s} value={s}>
-                {s === 'all' ? 'Tous les statuts' : statusLabels[s]}
+                {s === 'all' ? l.allStatuses : t.devisStatus[s]}
               </option>
             ))}
           </Select>
         </div>
       </div>
 
-      {isLoading && <p className="text-sm text-slate">Chargement...</p>}
+      {isLoading && <p className="text-sm text-slate">{l.loading}</p>}
       {isError && (
-        <p className="rounded-md bg-danger/[0.08] px-3 py-2.5 text-sm font-semibold text-danger">
-          Impossible de charger les devis.
-        </p>
+        <p className="rounded-md bg-danger/[0.08] px-3 py-2.5 text-sm font-semibold text-danger">{l.error}</p>
       )}
 
       {devis && (
@@ -66,15 +67,15 @@ function AdminDevisList() {
           <div className="overflow-x-auto">
             <div className="min-w-[880px]">
               <div className="grid grid-cols-[1.4fr_1fr_0.8fr_0.9fr_1fr_0.6fr] gap-3 border-b border-navy/[0.08] px-5 py-3.5 text-xs font-extrabold uppercase tracking-[0.03em] text-slate">
-                <span>Client</span>
-                <span>Catégorie</span>
-                <span>Type</span>
-                <span>Statut</span>
-                <span>Date</span>
-                <span>Action</span>
+                <span>{l.colClient}</span>
+                <span>{l.colCategory}</span>
+                <span>{l.colType}</span>
+                <span>{l.colStatus}</span>
+                <span>{l.colDate}</span>
+                <span>{l.colAction}</span>
               </div>
 
-              {filtered.length === 0 && <p className="px-5 py-6 text-sm text-slate">Aucun devis trouvé.</p>}
+              {filtered.length === 0 && <p className="px-5 py-6 text-sm text-slate">{l.empty}</p>}
 
               {filtered.map((d) => (
                 <div
@@ -88,13 +89,13 @@ function AdminDevisList() {
                   <span className="truncate text-slate">{d.category}</span>
                   <span className="text-ink">{d.op_type}</span>
                   <span>
-                    <Badge variant={statusBadgeVariant[d.status]}>{statusLabels[d.status]}</Badge>
+                    <Badge variant={statusBadgeVariant[d.status]}>{t.devisStatus[d.status]}</Badge>
                   </span>
                   <span className="text-slate">
                     {new Date(d.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
                   </span>
                   <Link to="/admin/devis/$devisId" params={{ devisId: d.id }} className="font-bold text-primary">
-                    Voir →
+                    {l.view} →
                   </Link>
                 </div>
               ))}
