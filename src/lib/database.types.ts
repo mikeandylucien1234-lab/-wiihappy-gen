@@ -152,6 +152,7 @@ export type Database = {
           op_type: DevisOpType
           quantity: string | null
           source_page: string | null
+          stale_alert_sent_at: string | null
           status: DevisStatus
           transport: DevisTransport | null
           user_id: string | null
@@ -170,6 +171,7 @@ export type Database = {
           op_type: DevisOpType
           quantity?: string | null
           source_page?: string | null
+          stale_alert_sent_at?: string | null
           status?: DevisStatus
           transport?: DevisTransport | null
           user_id?: string | null
@@ -188,6 +190,7 @@ export type Database = {
           op_type?: DevisOpType
           quantity?: string | null
           source_page?: string | null
+          stale_alert_sent_at?: string | null
           status?: DevisStatus
           transport?: DevisTransport | null
           user_id?: string | null
