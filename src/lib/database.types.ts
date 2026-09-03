@@ -14,6 +14,7 @@
 export type DevisStatus = 'nouveau' | 'en_cours' | 'accepte' | 'refuse' | 'traite' | 'archive'
 export type DevisOpType = 'Import' | 'Export'
 export type DevisTransport = 'Aérien' | 'Maritime'
+export type AdminRole = 'Admin' | 'Agent' | 'Lecture seule'
 
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
@@ -23,6 +24,68 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_users: {
+        Row: {
+          active: boolean
+          created_at: string
+          email: string
+          id: string
+          name: string
+          role: AdminRole
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          email: string
+          id: string
+          name: string
+          role: AdminRole
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          role?: AdminRole
+        }
+        Relationships: []
+      }
+      devis_notes: {
+        Row: {
+          author_id: string | null
+          author_name: string
+          body: string
+          created_at: string
+          devis_id: string
+          id: string
+        }
+        Insert: {
+          author_id?: string | null
+          author_name: string
+          body: string
+          created_at?: string
+          devis_id: string
+          id?: string
+        }
+        Update: {
+          author_id?: string | null
+          author_name?: string
+          body?: string
+          created_at?: string
+          devis_id?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'devis_notes_devis_id_fkey'
+            columns: ['devis_id']
+            isOneToOne: false
+            referencedRelation: 'devis'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       devis: {
         Row: {
           attachment_paths: string[]

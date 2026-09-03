@@ -1,4 +1,4 @@
-import { Outlet, createRootRoute } from '@tanstack/react-router'
+import { Outlet, createRootRoute, useRouterState } from '@tanstack/react-router'
 import { QuoteDrawer } from '@/components/sections/QuoteDrawer'
 import { QuoteFab } from '@/components/sections/QuoteFab'
 import { AuthProvider } from '@/features/auth/AuthContext'
@@ -9,12 +9,18 @@ export const Route = createRootRoute({
 })
 
 function RootLayout() {
+  const isAdmin = useRouterState({ select: (s) => s.location.pathname.startsWith('/admin') })
+
   return (
     <AuthProvider>
       <QuoteFormProvider>
         <Outlet />
-        <QuoteDrawer />
-        <QuoteFab />
+        {!isAdmin && (
+          <>
+            <QuoteDrawer />
+            <QuoteFab />
+          </>
+        )}
       </QuoteFormProvider>
     </AuthProvider>
   )
