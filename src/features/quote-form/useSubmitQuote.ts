@@ -25,30 +25,28 @@ async function uploadAttachments(attachments: File[]): Promise<string[]> {
 async function submitQuote(form: QuoteFormData & { sourcePage?: string }) {
   const attachmentPaths = await uploadAttachments(form.attachments)
 
-  const { data, error } = await supabase
-    .from('devis')
-    .insert({
-      op_type: form.opType,
-      name: form.name.trim(),
-      whatsapp: form.whatsapp.trim() || null,
-      email: form.email.trim() || null,
-      category: form.category,
-      description: form.description.trim(),
-      quantity: form.quantity.trim() || null,
-      budget: form.budget.trim() || null,
-      country: form.country.trim() || null,
-      transport: form.transport,
-      attachment_paths: attachmentPaths,
-      source_page: form.sourcePage ?? null,
-    })
-    .select()
-    .single()
+  // No .select() here: the anon role can only INSERT into devis (see
+  // supabase/migrations/0001_init.sql), not SELECT, so asking PostgREST to
+  // return the inserted row would fail its own RLS check on the read-back
+  // even though the insert itself succeeded.
+  const { error } = await supabase.from('devis').insert({
+    op_type: form.opType,
+    name: form.name.trim(),
+    whatsapp: form.whatsapp.trim() || null,
+    email: form.email.trim() || null,
+    category: form.category,
+    description: form.description.trim(),
+    quantity: form.quantity.trim() || null,
+    budget: form.budget.trim() || null,
+    country: form.country.trim() || null,
+    transport: form.transport,
+    attachment_paths: attachmentPaths,
+    source_page: form.sourcePage ?? null,
+  })
 
   if (error) {
     throw new Error(`Échec de l'envoi de la demande : ${error.message}`)
   }
-
-  return data
 }
 
 export function useSubmitQuote() {
