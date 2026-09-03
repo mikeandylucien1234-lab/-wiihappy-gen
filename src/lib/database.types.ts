@@ -15,6 +15,7 @@ export type DevisStatus = 'nouveau' | 'en_cours' | 'accepte' | 'refuse' | 'trait
 export type DevisOpType = 'Import' | 'Export'
 export type DevisTransport = 'Aérien' | 'Maritime'
 export type AdminRole = 'Admin' | 'Agent' | 'Lecture seule'
+export type Locale = 'fr' | 'en' | 'es'
 
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
@@ -24,6 +25,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_invites: {
+        Row: {
+          created_at: string
+          email: string
+          invited_by: string | null
+          role: AdminRole
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          invited_by?: string | null
+          role: AdminRole
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          invited_by?: string | null
+          role?: AdminRole
+        }
+        Relationships: []
+      }
       admin_users: {
         Row: {
           active: boolean
@@ -48,6 +70,36 @@ export type Database = {
           id?: string
           name?: string
           role?: AdminRole
+        }
+        Relationships: []
+      }
+      categories: {
+        Row: {
+          active: boolean
+          created_at: string
+          id: string
+          label: string
+          placeholder_label: string | null
+          slug: string
+          sort_order: number
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          label: string
+          placeholder_label?: string | null
+          slug: string
+          sort_order?: number
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          label?: string
+          placeholder_label?: string | null
+          slug?: string
+          sort_order?: number
         }
         Relationships: []
       }
@@ -143,6 +195,44 @@ export type Database = {
         }
         Relationships: []
       }
+      notifications: {
+        Row: {
+          body: string | null
+          created_at: string
+          devis_id: string | null
+          id: string
+          read: boolean
+          title: string
+          type: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          devis_id?: string | null
+          id?: string
+          read?: boolean
+          title: string
+          type?: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          devis_id?: string | null
+          id?: string
+          read?: boolean
+          title?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'notifications_devis_id_fkey'
+            columns: ['devis_id']
+            isOneToOne: false
+            referencedRelation: 'devis'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       paiements: {
         Row: {
           amount: number
@@ -189,6 +279,51 @@ export type Database = {
             referencedColumns: ['id']
           },
         ]
+      }
+      site_content: {
+        Row: {
+          created_at: string
+          id: string
+          key: string
+          locale: Locale
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          key: string
+          locale: Locale
+          updated_at?: string
+          value: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          key?: string
+          locale?: Locale
+          updated_at?: string
+          value?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          key: string
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          value: string
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          value?: string
+        }
+        Relationships: []
       }
     }
     Views: Record<string, never>
