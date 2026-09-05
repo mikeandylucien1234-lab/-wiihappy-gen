@@ -7,7 +7,7 @@ export function About() {
   return (
     <section id="apropos" className="mx-auto max-w-content px-6 pt-20">
       <Card radius="xl" padding="lg" shadow="lg" className="flex flex-wrap items-center gap-12">
-        <div className="min-w-[320px] flex-1">
+        <div className="hidden min-w-[320px] flex-1 md:block">
           <div className="mb-[14px] text-eyebrow text-accent">{t.about.eyebrow}</div>
           <h2 className="mb-[18px] text-[clamp(1.5rem,3vw,2rem)] font-extrabold leading-[1.25] tracking-[-0.5px] text-ink">
             {t.about.titlePrefix}{' '}

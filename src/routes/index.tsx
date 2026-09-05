@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { About } from '@/components/sections/About'
+import { AboutIntro } from '@/components/sections/AboutIntro'
 import { Categories } from '@/components/sections/Categories'
 import { Consultation } from '@/components/sections/Consultation'
 import { ConsultationBanner } from '@/components/sections/ConsultationBanner'
@@ -24,6 +25,7 @@ function LandingPage() {
       <DirectorQuote />
       <Categories />
       <div className="md:hidden">
+        <AboutIntro />
         <ConsultationBanner />
       </div>
       <About />
