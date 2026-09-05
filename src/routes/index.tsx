@@ -21,9 +21,9 @@ function LandingPage() {
       <Hero />
       <Services />
       <DirectorQuote />
+      <Categories />
       <About />
       <GlobalReach />
-      <Categories />
       <Consultation />
       <Faq />
       <Footer />
