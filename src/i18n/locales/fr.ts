@@ -106,7 +106,7 @@ export const fr = {
   },
 
   directorQuote: {
-    text: '"Un professionnel et entrepreneur incluant la direction générale d\'organisations de toute taille, le développement stratégique, les opérations et le marketing produit à l\'échelle mondiale."',
+    text: '"Un entrepreneur passionné de stratégie internationale."',
     author: 'M. Fagenson Phadael, Directeur',
     imageLabel: 'Photo du directeur',
   },

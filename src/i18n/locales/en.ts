@@ -97,7 +97,7 @@ export const en: typeof fr = {
   },
 
   directorQuote: {
-    text: '"A professional and entrepreneur with experience in general management of organizations of all sizes, strategic development, operations and product marketing on a global scale."',
+    text: '"An entrepreneur passionate about international strategy."',
     author: 'Mr. Fagenson Phadael, Director',
     imageLabel: 'Photo of the director',
   },

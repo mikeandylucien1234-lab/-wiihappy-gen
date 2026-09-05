@@ -97,7 +97,7 @@ export const es: typeof fr = {
   },
 
   directorQuote: {
-    text: '"Un profesional y emprendedor con experiencia en la dirección general de organizaciones de todos los tamaños, el desarrollo estratégico, las operaciones y el marketing de producto a escala mundial."',
+    text: '"Un emprendedor apasionado por la estrategia internacional."',
     author: 'Sr. Fagenson Phadael, Director',
     imageLabel: 'Foto del director',
   },

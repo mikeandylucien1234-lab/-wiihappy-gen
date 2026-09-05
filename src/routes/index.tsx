@@ -20,8 +20,8 @@ function LandingPage() {
       <Header overlay />
       <Hero />
       <Services />
-      <About />
       <DirectorQuote />
+      <About />
       <GlobalReach />
       <Categories />
       <Consultation />
