@@ -50,13 +50,13 @@ export default {
       },
       fontSize: {
         // Semantic type scale (size, { lineHeight, letterSpacing, fontWeight })
-        hero: ['clamp(2.125rem,4.6vw,3.25rem)', { lineHeight: '1.12', letterSpacing: '-0.02em', fontWeight: '800' }],
-        h1: ['clamp(2.125rem,4.6vw,3.25rem)', { lineHeight: '1.12', letterSpacing: '-0.02em', fontWeight: '800' }],
-        h2: ['clamp(1.625rem,3.2vw,2.25rem)', { lineHeight: '1.25', letterSpacing: '-0.01em', fontWeight: '800' }],
+        hero: ['clamp(1.625rem,5vw,3.25rem)', { lineHeight: '1.18', letterSpacing: '-0.02em', fontWeight: '800' }],
+        h1: ['clamp(1.625rem,5vw,3.25rem)', { lineHeight: '1.18', letterSpacing: '-0.02em', fontWeight: '800' }],
+        h2: ['clamp(1.375rem,4vw,2.25rem)', { lineHeight: '1.3', letterSpacing: '-0.01em', fontWeight: '800' }],
         h3: ['1.125rem', { lineHeight: '1.3', fontWeight: '700' }],
         h4: ['1rem', { lineHeight: '1.3', fontWeight: '700' }],
         eyebrow: ['0.78125rem', { lineHeight: '1.3', letterSpacing: '0.12em', fontWeight: '800' }],
-        'body-lg': ['1.0625rem', { lineHeight: '1.6' }],
+        'body-lg': ['clamp(0.9375rem,2.5vw,1.0625rem)', { lineHeight: '1.6' }],
         body: ['0.9375rem', { lineHeight: '1.6' }],
         'body-sm': ['0.875rem', { lineHeight: '1.55' }],
         caption: ['0.75rem', { lineHeight: '1.4' }],
