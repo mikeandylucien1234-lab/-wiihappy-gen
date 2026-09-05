@@ -6,11 +6,13 @@ const serviceMeta = [
   {
     slug: 'importation',
     color: '#0057D9',
+    bg: 'bg-primary/10',
     icon: <path d="M2 12h13m0 0-4-4m4 4-4 4M15 6h5v12h-5" />,
   },
   {
     slug: 'exportation',
     color: '#0057D9',
+    bg: 'bg-primary/10',
     icon: (
       <>
         <rect x="3" y="10" width="14" height="8" rx="1.5" />
@@ -21,6 +23,7 @@ const serviceMeta = [
   {
     slug: 'sourcing-personnalise',
     color: '#FF8C00',
+    bg: 'bg-accent/[0.12]',
     icon: (
       <>
         <rect x="4" y="10" width="16" height="10" rx="2" />
@@ -31,6 +34,7 @@ const serviceMeta = [
   {
     slug: 'accompagnement-douane',
     color: '#FF8C00',
+    bg: 'bg-accent/[0.12]',
     icon: (
       <>
         <rect x="5" y="3" width="14" height="18" rx="2" />
@@ -55,30 +59,30 @@ export function Services() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-[22px]">
+      <div className="grid grid-cols-2 gap-3 sm:gap-[22px] lg:grid-cols-4">
         {serviceMeta.map((service) => {
           const content = t.homeServices.items[service.slug]
           return (
             <Link key={service.slug} to="/services/$slug" params={{ slug: service.slug }} className="block">
               <Card
                 radius="xl"
-                padding="md"
+                padding="none"
                 shadow="md"
                 hoverable
-                className="relative h-full cursor-pointer text-inherit"
+                className="h-full cursor-pointer p-4 text-inherit sm:p-6 lg:p-[30px]"
               >
-                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke={service.color} strokeWidth="1.6">
-                  {service.icon}
-                </svg>
-                <h3 className="mb-3 mt-5 text-lg font-bold text-ink">{content.title}</h3>
-                <ul className="mb-[30px] list-disc pl-[18px] text-sm leading-[1.7] text-slate">
+                <div className={`flex h-10 w-10 items-center justify-center rounded-xl sm:h-12 sm:w-12 ${service.bg}`}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={service.color} strokeWidth="1.8" className="sm:h-6 sm:w-6">
+                    {service.icon}
+                  </svg>
+                </div>
+                <h3 className="mb-1.5 mt-3 text-sm font-bold text-ink sm:mb-3 sm:mt-5 sm:text-lg">{content.title}</h3>
+                <ul className="hidden list-disc pl-[18px] text-sm leading-[1.7] text-slate sm:block">
                   {content.bullets.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
-                <div className="absolute bottom-6 right-6 flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] border-navy/15 font-bold text-ink">
-                  →
-                </div>
+                <p className="text-xs leading-[1.5] text-slate sm:hidden">{content.bullets[0]}</p>
               </Card>
             </Link>
           )
