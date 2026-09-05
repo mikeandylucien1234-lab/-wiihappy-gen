@@ -19,8 +19,8 @@ function LandingPage() {
     <div className="overflow-x-hidden bg-surface text-ink">
       <Header overlay />
       <Hero />
-      <About />
       <Services />
+      <About />
       <DirectorQuote />
       <GlobalReach />
       <Categories />

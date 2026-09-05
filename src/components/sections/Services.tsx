@@ -69,20 +69,19 @@ export function Services() {
                 padding="none"
                 shadow="md"
                 hoverable
-                className="h-full cursor-pointer p-4 text-inherit sm:p-6 lg:p-[30px]"
+                className="h-full cursor-pointer p-5 text-inherit sm:p-6 lg:p-[30px]"
               >
-                <div className={`flex h-10 w-10 items-center justify-center rounded-xl sm:h-12 sm:w-12 ${service.bg}`}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={service.color} strokeWidth="1.8" className="sm:h-6 sm:w-6">
+                <div className={`flex h-11 w-11 items-center justify-center rounded-xl sm:h-12 sm:w-12 ${service.bg}`}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={service.color} strokeWidth="1.8" className="sm:h-6 sm:w-6">
                     {service.icon}
                   </svg>
                 </div>
-                <h3 className="mb-1.5 mt-3 text-sm font-bold text-ink sm:mb-3 sm:mt-5 sm:text-lg">{content.title}</h3>
-                <ul className="hidden list-disc pl-[18px] text-sm leading-[1.7] text-slate sm:block">
+                <h3 className="mb-2 mt-4 text-base font-bold text-ink sm:mb-3 sm:mt-5 sm:text-lg">{content.title}</h3>
+                <ul className="list-disc pl-[18px] text-[13.5px] leading-[1.6] text-slate sm:text-sm sm:leading-[1.7]">
                   {content.bullets.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
-                <p className="text-xs leading-[1.5] text-slate sm:hidden">{content.bullets[0]}</p>
               </Card>
             </Link>
           )
