@@ -53,6 +53,8 @@ export const en: typeof fr = {
     paragraph:
       'Reliable sourcing of products from China and worldwide — vehicles, food, textiles, electronics. From supplier verification through to delivery.',
     imageLabel: 'Realistic photo: cargo plane, globe, truck and containers',
+    ctaSecondary: 'How it works',
+    scrollCta: 'Discover more',
     trustCount: '500+',
     trustLabel: 'clients trust us',
   },

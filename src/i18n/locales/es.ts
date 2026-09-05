@@ -53,6 +53,8 @@ export const es: typeof fr = {
     paragraph:
       'Sourcing fiable de productos en China y a nivel internacional — vehículos, alimentación, textil, electrónica. Desde la verificación del proveedor hasta la entrega.',
     imageLabel: 'Foto realista: avión de carga, globo terráqueo, camión y contenedores',
+    ctaSecondary: 'Cómo funciona',
+    scrollCta: 'Descubrir más',
     trustCount: '500+',
     trustLabel: 'clientes confían en nosotros',
   },

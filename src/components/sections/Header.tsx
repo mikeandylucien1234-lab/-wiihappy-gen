@@ -9,8 +9,22 @@ import type { Locale } from '@/lib/database.types'
 
 const locales: Locale[] = ['fr', 'en', 'es']
 
-export function Header() {
+/** Rough clearance so "past the hero" triggers once the fixed header would start
+ * covering real content rather than empty video, without needing to measure the
+ * hero section's actual height. */
+const OVERLAY_HEADER_CLEARANCE = 80
+
+/** Tailwind's md breakpoint — the video hero (and this header's transparent-over-it
+ * treatment) is mobile-only, so above this width the header behaves exactly like
+ * `overlay=false` regardless of what the page passed in. */
+const MOBILE_BREAKPOINT = 768
+
+export function Header({ overlay = false }: { overlay?: boolean }) {
   const [scrolled, setScrolled] = useState(false)
+  const [heroPassed, setHeroPassed] = useState(!overlay)
+  const [isMobileViewport, setIsMobileViewport] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT,
+  )
   const [menuOpen, setMenuOpen] = useState(false)
   const { openDrawer } = useQuoteForm()
   const { user } = useAuth()
@@ -25,15 +39,24 @@ export function Header() {
   ]
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
+    function onScroll() {
+      setScrolled(window.scrollY > 12)
+      setIsMobileViewport(window.innerWidth < MOBILE_BREAKPOINT)
+      if (overlay) setHeroPassed(window.scrollY > window.innerHeight - OVERLAY_HEADER_CLEARANCE)
+    }
+    onScroll()
     window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [overlay])
 
   useEffect(() => {
     if (!menuOpen) return
     const onResize = () => {
-      if (window.innerWidth >= 768) setMenuOpen(false)
+      if (window.innerWidth >= MOBILE_BREAKPOINT) setMenuOpen(false)
     }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
@@ -43,21 +66,27 @@ export function Header() {
     setMenuOpen(false)
   }
 
+  const overlayActive = overlay && isMobileViewport
+  const solid = !overlayActive || heroPassed || menuOpen
+  const textColor = solid ? 'text-ink' : 'text-white'
+  const mutedColor = solid ? 'text-slate' : 'text-white/75'
+
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 bg-white transition-shadow duration-300',
-        scrolled ? 'bg-white/96 shadow-[0_4px_20px_rgba(10,42,102,0.08)] backdrop-blur-sm' : 'shadow-none',
+        'z-50 transition-[background-color,box-shadow] duration-300',
+        overlayActive ? 'fixed left-0 right-0 top-0' : 'sticky top-0',
+        solid ? cn('bg-white', scrolled && 'bg-white/[0.96] shadow-[0_4px_20px_rgba(10,42,102,0.08)] backdrop-blur-sm') : 'bg-transparent',
       )}
     >
       <div className="mx-auto flex max-w-content items-center gap-x-3 gap-y-2.5 px-4 py-4 sm:gap-x-6 sm:px-6">
         <Link to="/" className="flex flex-none items-baseline" onClick={closeMenu}>
-          <Logo className="text-xl sm:text-2xl" />
+          <Logo variant={solid ? 'dark' : 'light'} className="text-xl sm:text-2xl" />
         </Link>
 
         <nav className="mx-auto hidden flex-wrap items-start gap-[26px] md:flex">
           <div className="flex flex-col items-center gap-1.5">
-            <Link to="/" hash="hero" className="whitespace-nowrap text-[14.5px] font-bold text-ink">
+            <Link to="/" hash="hero" className={cn('whitespace-nowrap text-[14.5px] font-bold transition-colors', textColor)}>
               {t.header.home}
             </Link>
             <div className="h-[5px] w-[5px] rounded-full bg-accent" />
@@ -67,7 +96,7 @@ export function Header() {
               key={item.hash}
               to="/"
               hash={item.hash}
-              className="self-start whitespace-nowrap pt-px text-[14.5px] font-semibold text-ink"
+              className={cn('self-start whitespace-nowrap pt-px text-[14.5px] font-semibold transition-colors', textColor)}
             >
               {item.label}
             </Link>
@@ -84,7 +113,13 @@ export function Header() {
                 aria-current={locale === l}
                 className={cn(
                   'rounded-md px-2 py-1 text-xs font-bold uppercase transition-colors',
-                  locale === l ? 'bg-primary/10 text-primary' : 'text-slate',
+                  solid
+                    ? locale === l
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-slate'
+                    : locale === l
+                      ? 'bg-white/20 text-white'
+                      : 'text-white/70',
                 )}
               >
                 {l}
@@ -93,7 +128,7 @@ export function Header() {
           </div>
           <Link
             to={user ? '/mon-compte' : '/connexion'}
-            className="hidden items-center gap-1.5 whitespace-nowrap text-[13.5px] font-bold text-ink sm:flex"
+            className={cn('hidden items-center gap-1.5 whitespace-nowrap text-[13.5px] font-bold transition-colors sm:flex', textColor)}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <circle cx="12" cy="8" r="4" />
@@ -101,9 +136,9 @@ export function Header() {
             </svg>
             {user ? t.header.myAccount : t.header.login}
           </Link>
-          <div className="hidden text-[13.5px] leading-tight text-ink md:block">
+          <div className={cn('hidden text-[13.5px] leading-tight transition-colors md:block', textColor)}>
             <div className="font-extrabold">{t.header.phone}</div>
-            <div className="text-xs text-slate">{t.header.hours}</div>
+            <div className={cn('text-xs', mutedColor)}>{t.header.hours}</div>
           </div>
           <Button
             variant="accent"
@@ -118,7 +153,7 @@ export function Header() {
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? t.header.closeMenu : t.header.openMenu}
             aria-expanded={menuOpen}
-            className="flex h-9 w-9 flex-none items-center justify-center rounded-md text-ink md:hidden"
+            className={cn('flex h-9 w-9 flex-none items-center justify-center rounded-md transition-colors md:hidden', textColor)}
           >
             <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               {menuOpen ? (

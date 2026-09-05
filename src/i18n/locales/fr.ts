@@ -62,6 +62,8 @@ export const fr = {
     paragraph:
       "Sourcing fiable de produits en Chine et à l'international — véhicules, alimentation, textile, électronique. De la vérification fournisseur jusqu'à la livraison.",
     imageLabel: 'Photo réaliste : avion cargo, globe, camion et conteneurs',
+    ctaSecondary: 'Comment ça marche',
+    scrollCta: 'Découvrir la suite',
     trustCount: '500+',
     trustLabel: 'clients nous font confiance',
   },

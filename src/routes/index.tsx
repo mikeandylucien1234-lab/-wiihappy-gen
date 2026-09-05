@@ -17,7 +17,7 @@ export const Route = createFileRoute('/')({
 function LandingPage() {
   return (
     <div className="overflow-x-hidden bg-surface text-ink">
-      <Header />
+      <Header overlay />
       <Hero />
       <About />
       <Services />
