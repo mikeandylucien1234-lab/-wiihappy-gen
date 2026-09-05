@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { ImagePlaceholder } from '@/components/ui'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -27,6 +28,8 @@ function useIsMobileViewport() {
 }
 
 function MobileVideoHero() {
+  const { t } = useLocale()
+
   return (
     <div className="relative h-screen min-h-screen w-full overflow-hidden">
       <video
@@ -39,6 +42,37 @@ function MobileVideoHero() {
         aria-hidden="true"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#061A4A]/60 via-transparent to-[#061A4A]/55" />
+
+      <Link
+        to="/"
+        hash="hero-intro"
+        aria-label={t.hero.scrollCta}
+        className="absolute bottom-7 left-1/2 z-10 flex h-11 w-11 -translate-x-1/2 animate-bounce items-center justify-center rounded-full text-white"
+      >
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </Link>
+    </div>
+  )
+}
+
+function MobileHeroIntro() {
+  const { t } = useLocale()
+
+  return (
+    <div id="hero-intro" className="px-6 pb-2 pt-12">
+      <div className="mb-[14px] text-eyebrow text-primary">{t.hero.eyebrow}</div>
+      <h1 className="mb-[18px] text-hero text-ink">
+        {t.hero.titleLine1}
+        <br />
+        {t.hero.titleLine2}
+        <br />
+        {t.hero.titleLine3}
+        <br />
+        <span className="bg-gradient-primary bg-clip-text text-transparent">{t.hero.titleHighlight}</span>
+      </h1>
+      <p className="text-body-lg text-slate">{t.hero.paragraph}</p>
     </div>
   )
 }
@@ -90,5 +124,16 @@ function DesktopHero() {
 export function Hero() {
   const isMobile = useIsMobileViewport()
 
-  return <section id="hero">{isMobile ? <MobileVideoHero /> : <DesktopHero />}</section>
+  return (
+    <section id="hero">
+      {isMobile ? (
+        <>
+          <MobileVideoHero />
+          <MobileHeroIntro />
+        </>
+      ) : (
+        <DesktopHero />
+      )}
+    </section>
+  )
 }
