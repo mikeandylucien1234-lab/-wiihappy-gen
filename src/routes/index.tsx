@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { About } from '@/components/sections/About'
 import { Categories } from '@/components/sections/Categories'
 import { Consultation } from '@/components/sections/Consultation'
+import { ConsultationBanner } from '@/components/sections/ConsultationBanner'
 import { DirectorQuote } from '@/components/sections/DirectorQuote'
 import { Faq } from '@/components/sections/Faq'
 import { Footer } from '@/components/sections/Footer'
@@ -23,7 +24,7 @@ function LandingPage() {
       <DirectorQuote />
       <Categories />
       <div className="md:hidden">
-        <Consultation />
+        <ConsultationBanner />
       </div>
       <About />
       <GlobalReach />
