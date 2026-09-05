@@ -1,8 +1,8 @@
-import { ImagePlaceholder } from '@/components/ui'
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
 import { useLocale } from '@/i18n/LocaleContext'
 
 const formCategories = ['Véhicules', 'Alimentation', 'Habillement', 'Autre'] as const
+const images = ['/images/categories/vehicules.jpg', '/images/categories/ciment.jpg', '/images/categories/habillement.jpg', '/images/categories/sourcing.jpg']
 
 export function Categories() {
   const { openDrawer } = useQuoteForm()
@@ -28,9 +28,7 @@ export function Categories() {
               }
               className="relative block h-[260px] overflow-hidden rounded-xl text-left"
             >
-              <div className="absolute inset-0">
-                <ImagePlaceholder shape="rect" label={category.placeholder} />
-              </div>
+              <img src={images[i]} alt={category.placeholder} className="absolute inset-0 h-full w-full object-cover" />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/10 to-primary-dark/80" />
               <span className="pointer-events-none absolute bottom-5 left-5 text-xl font-extrabold text-white">
                 {category.label}
