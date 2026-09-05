@@ -24,6 +24,8 @@ export const en: typeof fr = {
     phone: '56 9 12567898',
     hours: 'Mon-Sat 8:00 AM - 8:00 PM',
     ctaQuote: 'Request a quote',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
   },
 
   footer: {

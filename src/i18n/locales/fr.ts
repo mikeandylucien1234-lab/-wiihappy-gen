@@ -33,6 +33,8 @@ export const fr = {
     phone: '56 9 12567898',
     hours: 'Lun-Sam 08:00 - 20:00',
     ctaQuote: 'Demander un devis',
+    openMenu: 'Ouvrir le menu',
+    closeMenu: 'Fermer le menu',
   },
 
   footer: {
