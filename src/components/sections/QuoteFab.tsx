@@ -1,9 +1,15 @@
+import { useBookingForm } from '@/features/booking/BookingFormContext'
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
 import { useLocale } from '@/i18n/LocaleContext'
 
 export function QuoteFab() {
   const { drawerOpen, toggleDrawer, showTooltip, showBadge } = useQuoteForm()
+  const { drawerOpen: bookingDrawerOpen } = useBookingForm()
   const { t } = useLocale()
+
+  // The booking drawer has its own close button; don't let this FAB (fixed, higher
+  // z-index) float on top of it and intercept clicks meant for the drawer below.
+  if (bookingDrawerOpen) return null
 
   return (
     <div className="fixed bottom-7 right-7 z-[200] flex flex-col items-end gap-2.5">

@@ -1,7 +1,18 @@
 import type { ReactNode } from 'react'
 
 export interface AdminNavItem {
-  id: 'dashboard' | 'devis' | 'clients' | 'paiements' | 'categories' | 'contenu' | 'statistiques' | 'equipe' | 'notifications' | 'parametres'
+  id:
+    | 'dashboard'
+    | 'devis'
+    | 'clients'
+    | 'paiements'
+    | 'categories'
+    | 'contenu'
+    | 'statistiques'
+    | 'equipe'
+    | 'reservations'
+    | 'notifications'
+    | 'parametres'
   to: string
   icon: ReactNode
 }
@@ -89,6 +100,17 @@ export const adminNavItems: AdminNavItem[] = [
         <circle cx="16" cy="9" r="2.4" />
         <path d="M2.5 20c0-3.3 2.4-5.5 5.5-5.5s5.5 2.2 5.5 5.5" />
         <path d="M14.5 14.8c2.3.3 3.8 2.2 3.8 5.2" />
+      </>
+    ),
+  },
+  {
+    id: 'reservations',
+    to: '/admin/reservations',
+    icon: (
+      <>
+        <rect x="3" y="4" width="18" height="17" rx="2" />
+        <path d="M3 9h18M8 2v4M16 2v4" />
+        <path d="M8 13h2m4 0h2M8 17h2m4 0h2" />
       </>
     ),
   },

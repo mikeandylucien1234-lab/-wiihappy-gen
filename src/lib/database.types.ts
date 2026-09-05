@@ -16,6 +16,8 @@ export type DevisOpType = 'Import' | 'Export'
 export type DevisTransport = 'Aérien' | 'Maritime'
 export type AdminRole = 'Admin' | 'Agent' | 'Lecture seule'
 export type Locale = 'fr' | 'en' | 'es'
+export type ReservationMotif = 'Importation' | 'Exportation' | 'Sourcing personnalisé' | 'Question générale'
+export type ReservationStatut = 'en_attente' | 'confirme' | 'annule' | 'effectue'
 
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
@@ -283,6 +285,45 @@ export type Database = {
           },
         ]
       }
+      reservations: {
+        Row: {
+          created_at: string
+          date_appel: string
+          email: string
+          heure_appel: string
+          id: string
+          motif: ReservationMotif
+          nom_complet: string
+          notes: string | null
+          statut: ReservationStatut
+          whatsapp: string
+        }
+        Insert: {
+          created_at?: string
+          date_appel: string
+          email: string
+          heure_appel: string
+          id?: string
+          motif: ReservationMotif
+          nom_complet: string
+          notes?: string | null
+          statut?: ReservationStatut
+          whatsapp: string
+        }
+        Update: {
+          created_at?: string
+          date_appel?: string
+          email?: string
+          heure_appel?: string
+          id?: string
+          motif?: ReservationMotif
+          nom_complet?: string
+          notes?: string | null
+          statut?: ReservationStatut
+          whatsapp?: string
+        }
+        Relationships: []
+      }
       site_content: {
         Row: {
           created_at: string
@@ -330,7 +371,12 @@ export type Database = {
       }
     }
     Views: Record<string, never>
-    Functions: Record<string, never>
+    Functions: {
+      get_booked_slots: {
+        Args: { p_start: string; p_end: string }
+        Returns: { date_appel: string; heure_appel: string }[]
+      }
+    }
     Enums: Record<string, never>
     CompositeTypes: Record<string, never>
   }

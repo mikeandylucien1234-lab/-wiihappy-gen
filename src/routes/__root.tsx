@@ -1,7 +1,9 @@
 import { Outlet, createRootRoute, useRouterState } from '@tanstack/react-router'
+import { BookingDrawer } from '@/components/sections/booking/BookingDrawer'
 import { QuoteDrawer } from '@/components/sections/QuoteDrawer'
 import { QuoteFab } from '@/components/sections/QuoteFab'
 import { AuthProvider } from '@/features/auth/AuthContext'
+import { BookingFormProvider } from '@/features/booking/BookingFormContext'
 import { QuoteFormProvider } from '@/features/quote-form/QuoteFormContext'
 import { LocaleProvider } from '@/i18n/LocaleContext'
 
@@ -16,13 +18,16 @@ function RootLayout() {
     <LocaleProvider>
       <AuthProvider>
         <QuoteFormProvider>
-          <Outlet />
-          {!isAdmin && (
-            <>
-              <QuoteDrawer />
-              <QuoteFab />
-            </>
-          )}
+          <BookingFormProvider>
+            <Outlet />
+            {!isAdmin && (
+              <>
+                <QuoteDrawer />
+                <QuoteFab />
+                <BookingDrawer />
+              </>
+            )}
+          </BookingFormProvider>
         </QuoteFormProvider>
       </AuthProvider>
     </LocaleProvider>
