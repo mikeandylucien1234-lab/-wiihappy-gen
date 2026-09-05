@@ -141,6 +141,7 @@ export const es: typeof fr = {
       'Reciba asesoramiento personalizado para asegurar sus operaciones de importación-exportación y evitar errores costosos.',
     imageLabel: 'Foto vertical: asesor de Wiihappy en un entorno profesional',
     cta: 'Reservar una consultoría',
+    mobileBannerCta: 'Reserva tu llamada',
     descriptionPrefix: 'Consultoría — ',
     cards: [
       {

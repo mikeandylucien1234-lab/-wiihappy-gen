@@ -140,6 +140,7 @@ export const en: typeof fr = {
     subtitle: 'Get personalized advice to secure your import-export operations and avoid costly mistakes.',
     imageLabel: 'Vertical photo: Wiihappy advisor in a professional setting',
     cta: 'Book a consultation',
+    mobileBannerCta: 'Book your call',
     descriptionPrefix: 'Consultation — ',
     cards: [
       {

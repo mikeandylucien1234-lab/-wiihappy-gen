@@ -150,6 +150,7 @@ export const fr = {
       "Bénéficiez de conseils personnalisés pour sécuriser vos opérations d'import-export et éviter les erreurs coûteuses.",
     imageLabel: 'Photo verticale : conseiller Wiihappy en environnement professionnel',
     cta: 'Réserver une consultation',
+    mobileBannerCta: 'Réserver votre appel',
     descriptionPrefix: 'Consultation — ',
     cards: [
       {
