@@ -22,9 +22,14 @@ function LandingPage() {
       <Services />
       <DirectorQuote />
       <Categories />
+      <div className="md:hidden">
+        <Consultation />
+      </div>
       <About />
       <GlobalReach />
-      <Consultation />
+      <div className="hidden md:block">
+        <Consultation />
+      </div>
       <Faq />
       <Footer />
     </div>
