@@ -189,6 +189,14 @@ export const fr = {
     ],
   },
 
+  locationMap: {
+    eyebrow: 'NOUS TROUVER',
+    title: 'Notre bureau',
+    name: 'Wiihappy Gen',
+    directions: 'Itinéraire',
+    openInMaps: 'Ouvrir dans Google Maps',
+  },
+
   faq: {
     title: 'Questions fréquentes',
     subtitle: "Tout ce qu'il faut savoir avant de commencer",

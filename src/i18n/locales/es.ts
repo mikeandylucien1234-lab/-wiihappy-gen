@@ -180,6 +180,14 @@ export const es: typeof fr = {
     ],
   },
 
+  locationMap: {
+    eyebrow: 'ENCUÉNTRENOS',
+    title: 'Nuestra oficina',
+    name: 'Wiihappy Gen',
+    directions: 'Cómo llegar',
+    openInMaps: 'Abrir en Google Maps',
+  },
+
   faq: {
     title: 'Preguntas frecuentes',
     subtitle: 'Todo lo que necesita saber antes de empezar',

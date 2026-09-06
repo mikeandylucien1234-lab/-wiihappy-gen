@@ -11,6 +11,7 @@ import { GlobalReach } from '@/components/sections/GlobalReach'
 import { GlobalReachMobile } from '@/components/sections/GlobalReachMobile'
 import { Header } from '@/components/sections/Header'
 import { Hero } from '@/components/sections/Hero'
+import { LocationMap } from '@/components/sections/LocationMap'
 import { Services } from '@/components/sections/Services'
 import { VisionStats } from '@/components/sections/VisionStats'
 
@@ -39,6 +40,7 @@ function LandingPage() {
       <div className="hidden md:block">
         <Consultation />
       </div>
+      <LocationMap />
       <Faq />
       <Footer />
     </div>

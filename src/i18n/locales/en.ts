@@ -179,6 +179,14 @@ export const en: typeof fr = {
     ],
   },
 
+  locationMap: {
+    eyebrow: 'FIND US',
+    title: 'Our office',
+    name: 'Wiihappy Gen',
+    directions: 'Directions',
+    openInMaps: 'Open in Google Maps',
+  },
+
   faq: {
     title: 'Frequently asked questions',
     subtitle: 'Everything you need to know before you start',
