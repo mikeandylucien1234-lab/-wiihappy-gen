@@ -1,7 +1,6 @@
 import { useLocale } from '@/i18n/LocaleContext'
 
-// Placeholder — swap for the real office address once confirmed.
-const ADDRESS = 'Av. Apoquindo 4700, Las Condes, Región Metropolitana, Chile'
+const ADDRESS = 'Rue Louverture 104, Saint-Marc, Haïti'
 
 export function LocationMap() {
   const { t } = useLocale()
