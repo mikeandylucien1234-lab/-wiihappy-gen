@@ -4,6 +4,7 @@ import { AuthShell } from '@/components/sections/auth/AuthShell'
 import { Button, Input, Label } from '@/components/ui'
 import { useAuth } from '@/features/auth/AuthContext'
 import { useLocale } from '@/i18n/LocaleContext'
+import { supabase } from '@/lib/supabase'
 
 type ConnexionSearch = { redirect?: string }
 
@@ -31,11 +32,31 @@ function Connexion() {
     setError(null)
     setLoading(true)
     const { error } = await signIn(email.trim(), password)
-    setLoading(false)
     if (error) {
+      setLoading(false)
       setError(error === 'Invalid login credentials' ? c.invalidCredentials : error)
       return
     }
+
+    if (!redirect) {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+      if (user) {
+        const { data: adminUser } = await supabase
+          .from('admin_users')
+          .select('active')
+          .eq('id', user.id)
+          .maybeSingle()
+        if (adminUser?.active) {
+          setLoading(false)
+          navigate({ to: '/admin/dashboard' })
+          return
+        }
+      }
+    }
+
+    setLoading(false)
     navigate({ to: redirect || '/mon-compte' })
   }
 
