@@ -1,4 +1,4 @@
-import { Button, Card, ImagePlaceholder } from '@/components/ui'
+import { Button, Card } from '@/components/ui'
 import { useLocale } from '@/i18n/LocaleContext'
 
 export function About() {
@@ -29,10 +29,10 @@ export function About() {
 
         <div className="flex min-w-[320px] flex-1 gap-4">
           <div className="h-80 flex-1 overflow-hidden rounded-xl">
-            <ImagePlaceholder shape="rect" label={t.about.image1Label} />
+            <img src="/images/about-1.webp" alt={t.about.image1Label} className="h-full w-full object-cover" />
           </div>
           <div className="mt-9 h-80 flex-1 overflow-hidden rounded-xl">
-            <ImagePlaceholder shape="rect" label={t.about.image2Label} />
+            <img src="/images/about-2.webp" alt={t.about.image2Label} className="h-full w-full object-cover" />
           </div>
         </div>
       </Card>

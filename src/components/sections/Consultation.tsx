@@ -1,4 +1,4 @@
-import { Button, Card, ImagePlaceholder } from '@/components/ui'
+import { Button, Card } from '@/components/ui'
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
 import { useLocale } from '@/i18n/LocaleContext'
 
@@ -87,7 +87,7 @@ export function Consultation() {
           </div>
 
           <div className="min-h-[340px] min-w-[260px] flex-[1.2] overflow-hidden rounded-[18px]">
-            <ImagePlaceholder shape="rect" label={t.consultation.imageLabel} />
+            <img src="/images/consultation-photo.webp" alt={t.consultation.imageLabel} className="h-full w-full object-cover" />
           </div>
 
           <div className="flex min-w-[260px] flex-1 flex-col gap-5">

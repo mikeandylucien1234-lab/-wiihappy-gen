@@ -1,4 +1,4 @@
-import { Button, ImagePlaceholder } from '@/components/ui'
+import { Button } from '@/components/ui'
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
 import { useLocale } from '@/i18n/LocaleContext'
 
@@ -63,8 +63,8 @@ export function GlobalReach() {
         </div>
 
         <div className="min-w-[320px] flex-1">
-          <div className="h-[340px]">
-            <ImagePlaceholder shape="rect" label={t.globalReach.imageLabel} />
+          <div className="h-[340px] overflow-hidden rounded-2xl">
+            <img src="/images/world-map.webp" alt={t.globalReach.imageLabel} className="h-full w-full object-contain" />
           </div>
         </div>
       </div>

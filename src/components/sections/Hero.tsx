@@ -1,6 +1,5 @@
 import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import { ImagePlaceholder } from '@/components/ui'
 import { useLocale } from '@/i18n/LocaleContext'
 
 const avatarStack = [
@@ -99,7 +98,7 @@ function DesktopHero() {
 
         <div className="relative min-w-[340px] flex-1">
           <div className="h-[440px] overflow-hidden rounded-3xl">
-            <ImagePlaceholder shape="rect" label={t.hero.imageLabel} />
+            <img src="/images/hero-photo.webp" alt={t.hero.imageLabel} className="h-full w-full object-cover" />
           </div>
           <div className="absolute -left-6 bottom-6 flex items-center gap-3 rounded-[18px] bg-white p-[14px_20px] shadow-[0_14px_36px_rgba(10,42,102,0.18)]">
             <div className="flex">
