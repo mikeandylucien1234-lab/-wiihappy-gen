@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui'
+import { useAuth } from '@/features/auth/AuthContext'
 import { STEP_COUNT } from '@/features/booking/types'
 import { useBookingForm } from '@/features/booking/BookingFormContext'
 import { useLocale } from '@/i18n/LocaleContext'
 import type { Locale } from '@/lib/database.types'
 import { cn } from '@/lib/cn'
+import { AuthGate } from '../AuthGate'
 import { BookingStepIndicator } from './BookingStepIndicator'
 import { StepContact } from './StepContact'
 import { StepDateTime } from './StepDateTime'
@@ -70,6 +72,7 @@ function SuccessScreen() {
 
 export function BookingDrawer() {
   const { drawerOpen, closeDrawer, step, stepError, goNext, goBack, submitted } = useBookingForm()
+  const { user } = useAuth()
   const { t } = useLocale()
 
   const StepComponent = stepComponents[step - 1]
@@ -94,7 +97,7 @@ export function BookingDrawer() {
         <div className="flex flex-none items-start justify-between px-8 pb-4 pt-9">
           <div>
             <h2 className="text-2xl font-extrabold tracking-[-0.5px] text-ink">{t.booking.header.title}</h2>
-            {!submitted && <p className="mt-1 text-[15px] text-slate">{t.booking.header.subtitle}</p>}
+            {!submitted && user && <p className="mt-1 text-[15px] text-slate">{t.booking.header.subtitle}</p>}
           </div>
           <button
             type="button"
@@ -107,7 +110,9 @@ export function BookingDrawer() {
         </div>
 
         <div className="flex-1 overflow-y-auto px-8 pb-9">
-          {submitted ? (
+          {!user ? (
+            <AuthGate onNavigate={closeDrawer} />
+          ) : submitted ? (
             <SuccessScreen />
           ) : (
             <>

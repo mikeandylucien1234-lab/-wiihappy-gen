@@ -1,6 +1,13 @@
 import type { fr } from './fr'
 
 export const es: typeof fr = {
+  authGate: {
+    title: 'Inicio de sesión requerido',
+    body: 'Cree una cuenta o inicie sesión para enviar su solicitud y seguir su avance.',
+    login: 'Iniciar sesión',
+    signup: 'Crear una cuenta',
+  },
+
   common: {
     loading: 'Cargando...',
     view: 'Ver',

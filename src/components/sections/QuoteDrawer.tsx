@@ -1,8 +1,10 @@
 import { Button } from '@/components/ui'
+import { useAuth } from '@/features/auth/AuthContext'
 import { STEP_COUNT } from '@/features/quote-form/types'
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
 import { useLocale } from '@/i18n/LocaleContext'
 import { cn } from '@/lib/cn'
+import { AuthGate } from './AuthGate'
 import { StepContact } from './quote-drawer/StepContact'
 import { StepDelivery } from './quote-drawer/StepDelivery'
 import { StepDetails } from './quote-drawer/StepDetails'
@@ -14,6 +16,7 @@ const stepComponents = [StepOperationType, StepContact, StepDetails, StepDeliver
 
 export function QuoteDrawer() {
   const { drawerOpen, closeDrawer, step, stepError, goNext, goBack, submitted, startNewRequest } = useQuoteForm()
+  const { user } = useAuth()
   const { t } = useLocale()
 
   const StepComponent = stepComponents[step - 1]
@@ -40,7 +43,7 @@ export function QuoteDrawer() {
             <h2 className="text-2xl font-extrabold tracking-[-0.5px] text-ink">
               {submitted ? t.quoteDrawer.titleSubmitted : t.quoteDrawer.titleDefault}
             </h2>
-            {!submitted && <p className="mt-1 text-[15px] text-slate">{t.quoteDrawer.subtitle}</p>}
+            {!submitted && user && <p className="mt-1 text-[15px] text-slate">{t.quoteDrawer.subtitle}</p>}
           </div>
           <button
             type="button"
@@ -53,7 +56,9 @@ export function QuoteDrawer() {
         </div>
 
         <div className="flex-1 overflow-y-auto px-8 pb-9">
-          {submitted ? (
+          {!user ? (
+            <AuthGate onNavigate={closeDrawer} />
+          ) : submitted ? (
             <div className="rounded-xl bg-gradient-primary-diag p-11 text-center text-white">
               <div className="mb-3 text-4xl">✓</div>
               <h3 className="mb-2 text-xl font-extrabold">{t.quoteDrawer.confirmationTitle}</h3>

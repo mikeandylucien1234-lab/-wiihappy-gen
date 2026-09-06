@@ -5,13 +5,19 @@ import { Button, Input, Label } from '@/components/ui'
 import { useAuth } from '@/features/auth/AuthContext'
 import { useLocale } from '@/i18n/LocaleContext'
 
+type InscriptionSearch = { redirect?: string }
+
 export const Route = createFileRoute('/inscription')({
+  validateSearch: (search: Record<string, unknown>): InscriptionSearch => ({
+    redirect: typeof search.redirect === 'string' ? search.redirect : undefined,
+  }),
   component: Inscription,
 })
 
 function Inscription() {
   const { signUp } = useAuth()
   const navigate = useNavigate()
+  const { redirect } = Route.useSearch()
   const { t } = useLocale()
   const i = t.auth.inscription
 
@@ -47,7 +53,7 @@ function Inscription() {
       setNeedsConfirmation(true)
       return
     }
-    navigate({ to: '/mon-compte' })
+    navigate({ to: redirect || '/mon-compte' })
   }
 
   if (needsConfirmation) {

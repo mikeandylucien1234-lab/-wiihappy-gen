@@ -1,7 +1,9 @@
 import { Button, Input, Label } from '@/components/ui'
+import { useAuth } from '@/features/auth/AuthContext'
 import { useCallbackForm } from '@/features/callback/CallbackFormContext'
 import { useLocale } from '@/i18n/LocaleContext'
 import { cn } from '@/lib/cn'
+import { AuthGate } from '../AuthGate'
 
 function SuccessScreen() {
   const { form, startNewRequest, closeDrawer } = useCallbackForm()
@@ -34,6 +36,7 @@ function SuccessScreen() {
 export function CallbackDrawer() {
   const { drawerOpen, closeDrawer, form, setField, formError, isSubmitting, isSubmitError, submitErrorMessage, submitted, submit } =
     useCallbackForm()
+  const { user } = useAuth()
   const { t } = useLocale()
   const c = t.callback
 
@@ -57,7 +60,7 @@ export function CallbackDrawer() {
         <div className="flex flex-none items-start justify-between px-8 pb-4 pt-9">
           <div>
             <h2 className="text-2xl font-extrabold tracking-[-0.5px] text-ink">{c.header.title}</h2>
-            {!submitted && <p className="mt-1 text-[15px] text-slate">{c.header.subtitle}</p>}
+            {!submitted && user && <p className="mt-1 text-[15px] text-slate">{c.header.subtitle}</p>}
           </div>
           <button
             type="button"
@@ -70,7 +73,9 @@ export function CallbackDrawer() {
         </div>
 
         <div className="flex-1 overflow-y-auto px-8 pb-9">
-          {submitted ? (
+          {!user ? (
+            <AuthGate onNavigate={closeDrawer} />
+          ) : submitted ? (
             <SuccessScreen />
           ) : (
             <>

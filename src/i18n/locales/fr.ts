@@ -10,6 +10,13 @@
  */
 
 export const fr = {
+  authGate: {
+    title: 'Connexion requise',
+    body: 'Créez un compte ou connectez-vous pour envoyer votre demande et en suivre l’avancement.',
+    login: 'Se connecter',
+    signup: 'Créer un compte',
+  },
+
   common: {
     loading: 'Chargement...',
     view: 'Voir',
