@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui'
-import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
+import { useBookingForm } from '@/features/booking/BookingFormContext'
 import { useLocale } from '@/i18n/LocaleContext'
 import { featureMeta } from './GlobalReach'
 
 export function GlobalReachMobile() {
-  const { openDrawer } = useQuoteForm()
+  const { openDrawer } = useBookingForm()
   const { t } = useLocale()
 
   return (
@@ -13,8 +13,8 @@ export function GlobalReachMobile() {
       <h2 className="mb-6 text-center text-h2 text-ink">{t.globalReach.title}</h2>
 
       <div className="mb-10 flex justify-center">
-        <Button variant="accent" onClick={() => openDrawer()}>
-          {t.globalReach.cta} <span>→</span>
+        <Button variant="accent" onClick={openDrawer}>
+          {t.globalReach.ctaMobile} <span>→</span>
         </Button>
       </div>
 

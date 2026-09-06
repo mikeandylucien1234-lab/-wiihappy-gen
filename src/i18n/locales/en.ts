@@ -107,6 +107,7 @@ export const en: typeof fr = {
     title: 'From China to your door, anywhere in the world',
     imageLabel: 'World map: route arrows from China',
     cta: 'Contact us',
+    ctaMobile: 'Let us call you',
     features: [
       {
         title: 'Direct purchasing in China',

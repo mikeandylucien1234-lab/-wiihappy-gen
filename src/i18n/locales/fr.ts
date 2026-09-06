@@ -116,6 +116,7 @@ export const fr = {
     title: 'De la Chine à votre porte, partout dans le monde',
     imageLabel: 'Carte du monde : flèches de trajets depuis la Chine',
     cta: 'Contactez-nous',
+    ctaMobile: 'Laissez-nous vous appeler',
     features: [
       {
         title: 'Achat direct en Chine',
