@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { useUnreadNotificationsCount } from '@/features/admin/notifications'
 import { useLocale } from '@/i18n/LocaleContext'
 
-export function AdminHeader({ name }: { name: string }) {
+export function AdminHeader({ name, onMenuClick }: { name: string; onMenuClick: () => void }) {
   const { data: unreadCount } = useUnreadNotificationsCount()
   const { t } = useLocale()
   const initials = name
@@ -13,7 +13,18 @@ export function AdminHeader({ name }: { name: string }) {
     .toUpperCase()
 
   return (
-    <header className="flex flex-none items-center gap-5 border-b border-navy/[0.08] bg-white px-7 py-3.5">
+    <header className="flex flex-none items-center gap-3 border-b border-navy/[0.08] bg-white px-4 py-3 sm:gap-5 sm:px-7 sm:py-3.5">
+      <button
+        type="button"
+        onClick={onMenuClick}
+        aria-label={t.admin.header.openMenu}
+        className="flex h-9 w-9 flex-none items-center justify-center rounded-md border-[1.5px] border-navy/10 text-ink md:hidden"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+
       <div className="relative max-w-[420px] flex-1">
         <svg
           width="17"

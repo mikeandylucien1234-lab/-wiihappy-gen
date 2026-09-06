@@ -512,6 +512,7 @@ export const es: typeof fr = {
     },
     header: {
       searchPlaceholder: 'Buscar...',
+      openMenu: 'Abrir menú',
     },
     dashboard: {
       greeting: (name: string) => `Hola, ${name}`,

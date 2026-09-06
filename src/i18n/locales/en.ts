@@ -507,6 +507,7 @@ export const en: typeof fr = {
     },
     header: {
       searchPlaceholder: 'Search...',
+      openMenu: 'Open menu',
     },
     dashboard: {
       greeting: (name: string) => `Hello, ${name}`,

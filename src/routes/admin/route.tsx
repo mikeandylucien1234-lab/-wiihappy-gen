@@ -1,4 +1,5 @@
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
+import { useState } from 'react'
 import { AdminHeader } from '@/components/admin/AdminHeader'
 import { AdminSidebar } from '@/components/admin/AdminSidebar'
 import { supabase } from '@/lib/supabase'
@@ -29,13 +30,14 @@ export const Route = createFileRoute('/admin')({
 
 function AdminLayout() {
   const { adminUser } = Route.useRouteContext()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
     <div className="flex min-h-screen bg-surface-admin text-ink">
-      <AdminSidebar name={adminUser.name} role={adminUser.role} />
+      <AdminSidebar name={adminUser.name} role={adminUser.role} mobileOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex min-w-0 flex-1 flex-col">
-        <AdminHeader name={adminUser.name} />
-        <main className="flex-1 overflow-y-auto p-7">
+        <AdminHeader name={adminUser.name} onMenuClick={() => setSidebarOpen(true)} />
+        <main className="flex-1 overflow-y-auto p-4 sm:p-7">
           <Outlet />
         </main>
       </div>

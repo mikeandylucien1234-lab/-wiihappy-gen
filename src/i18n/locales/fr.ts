@@ -520,6 +520,7 @@ export const fr = {
     },
     header: {
       searchPlaceholder: 'Rechercher...',
+      openMenu: 'Ouvrir le menu',
     },
     dashboard: {
       greeting: (name: string) => `Bonjour, ${name}`,
