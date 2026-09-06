@@ -82,8 +82,8 @@ export function Consultation() {
             </InfoCard>
           </div>
 
-          <div className="min-h-[340px] min-w-[260px] flex-[1.2] overflow-hidden rounded-[18px]">
-            <img src="/images/consultation-photo.webp" alt={t.consultation.imageLabel} className="h-full w-full object-cover" />
+          <div className="flex min-h-[340px] min-w-[260px] flex-[1.2] items-center justify-center overflow-hidden rounded-[18px] bg-white">
+            <img src="/images/consultation-photo.webp" alt={t.consultation.imageLabel} className="h-full w-full object-contain" />
           </div>
 
           <div className="flex min-w-[260px] flex-1 flex-col gap-5">
