@@ -317,6 +317,7 @@ export const fr = {
     title: 'Des solutions pour chaque besoin',
     subtitle:
       'Import, export, sourcing personnalisé ou accompagnement douane — choisissez le service qui correspond à votre projet.',
+    breadcrumbLabel: 'Services',
   },
 
   servicePages: {
@@ -334,6 +335,7 @@ export const fr = {
     backToServices: '← Voir tous les services',
     pages: {
       importation: {
+        shortTitle: 'Importation',
         eyebrow: 'SERVICE IMPORTATION',
         title: "Importez depuis la Chine et l'international en toute confiance",
         description:
@@ -362,6 +364,7 @@ export const fr = {
         ctaLabel: "Demander un devis d'importation",
       },
       exportation: {
+        shortTitle: 'Exportation',
         eyebrow: 'SERVICE EXPORTATION',
         title: 'Exportez vos produits partout dans le monde',
         description:
@@ -390,6 +393,7 @@ export const fr = {
         ctaLabel: "Demander un devis d'exportation",
       },
       'sourcing-personnalise': {
+        shortTitle: 'Sourcing personnalisé',
         eyebrow: 'SOURCING PERSONNALISÉ',
         title: 'Un produit hors catalogue ? Nous le trouvons pour vous',
         description:
@@ -415,6 +419,7 @@ export const fr = {
         ctaLabel: 'Démarrer mon sourcing',
       },
       'accompagnement-douane': {
+        shortTitle: 'Accompagnement douane',
         eyebrow: 'ACCOMPAGNEMENT DOUANE',
         title: 'Formalités douanières gérées de bout en bout',
         description:

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { Footer } from '@/components/sections/Footer'
 import { Header } from '@/components/sections/Header'
+import { ServiceBreadcrumb } from '@/components/sections/service/ServiceBreadcrumb'
 import { Card } from '@/components/ui'
 import { services } from '@/features/services/data'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -15,8 +16,9 @@ function ServicesIndex() {
   return (
     <div className="overflow-x-hidden bg-surface text-ink">
       <Header />
+      <ServiceBreadcrumb />
 
-      <section className="mx-auto max-w-content px-6 pt-14">
+      <section className="mx-auto max-w-content px-6 pt-8">
         <div className="mb-3 text-eyebrow text-primary">{t.servicesIndex.eyebrow}</div>
         <h1 className="mb-4 text-h1 text-ink">{t.servicesIndex.title}</h1>
         <p className="mb-12 max-w-[560px] text-body-lg text-slate">{t.servicesIndex.subtitle}</p>

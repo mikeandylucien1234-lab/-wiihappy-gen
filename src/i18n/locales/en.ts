@@ -306,6 +306,7 @@ export const en: typeof fr = {
     eyebrow: 'OUR SERVICES',
     title: 'Solutions for every need',
     subtitle: 'Import, export, custom sourcing or customs support — choose the service that fits your project.',
+    breadcrumbLabel: 'Services',
   },
 
   servicePages: {
@@ -323,6 +324,7 @@ export const en: typeof fr = {
     backToServices: '← See all services',
     pages: {
       importation: {
+        shortTitle: 'Import',
         eyebrow: 'IMPORT SERVICE',
         title: 'Import from China and worldwide with total confidence',
         description:
@@ -351,6 +353,7 @@ export const en: typeof fr = {
         ctaLabel: 'Request an import quote',
       },
       exportation: {
+        shortTitle: 'Export',
         eyebrow: 'EXPORT SERVICE',
         title: 'Export your products anywhere in the world',
         description: 'Tailor-made logistics quotes, choice of transport mode and shipping formalities handled end-to-end.',
@@ -378,6 +381,7 @@ export const en: typeof fr = {
         ctaLabel: 'Request an export quote',
       },
       'sourcing-personnalise': {
+        shortTitle: 'Custom sourcing',
         eyebrow: 'CUSTOM SOURCING',
         title: "A product outside our catalogue? We'll find it for you",
         description:
@@ -403,6 +407,7 @@ export const en: typeof fr = {
         ctaLabel: 'Start my sourcing',
       },
       'accompagnement-douane': {
+        shortTitle: 'Customs support',
         eyebrow: 'CUSTOMS SUPPORT',
         title: 'Customs formalities handled end-to-end',
         description: 'Documents, customs filing and case tracking: we take care of everything to secure your operation.',

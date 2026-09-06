@@ -9,7 +9,7 @@ export function ServiceHero({ service }: { service: ServiceMeta }) {
   const content = t.servicePages.pages[service.slug]
 
   return (
-    <section className="mx-auto max-w-content px-6 pt-14">
+    <section className="mx-auto max-w-content px-6 pt-8">
       <div className="flex flex-wrap items-center gap-14">
         <div className="min-w-[340px] flex-1">
           <div className="mb-[18px] text-eyebrow text-primary">{content.eyebrow}</div>

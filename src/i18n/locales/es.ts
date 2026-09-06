@@ -308,6 +308,7 @@ export const es: typeof fr = {
     title: 'Soluciones para cada necesidad',
     subtitle:
       'Importación, exportación, sourcing personalizado o acompañamiento aduanero — elija el servicio que se adapte a su proyecto.',
+    breadcrumbLabel: 'Servicios',
   },
 
   servicePages: {
@@ -325,6 +326,7 @@ export const es: typeof fr = {
     backToServices: '← Ver todos los servicios',
     pages: {
       importation: {
+        shortTitle: 'Importación',
         eyebrow: 'SERVICIO DE IMPORTACIÓN',
         title: 'Importe desde China y el resto del mundo con total confianza',
         description:
@@ -353,6 +355,7 @@ export const es: typeof fr = {
         ctaLabel: 'Solicitar presupuesto de importación',
       },
       exportation: {
+        shortTitle: 'Exportación',
         eyebrow: 'SERVICIO DE EXPORTACIÓN',
         title: 'Exporte sus productos a cualquier parte del mundo',
         description:
@@ -381,6 +384,7 @@ export const es: typeof fr = {
         ctaLabel: 'Solicitar presupuesto de exportación',
       },
       'sourcing-personnalise': {
+        shortTitle: 'Sourcing personalizado',
         eyebrow: 'SOURCING PERSONALIZADO',
         title: '¿Un producto fuera de catálogo? Lo encontramos por usted',
         description:
@@ -406,6 +410,7 @@ export const es: typeof fr = {
         ctaLabel: 'Iniciar mi sourcing',
       },
       'accompagnement-douane': {
+        shortTitle: 'Acompañamiento aduanero',
         eyebrow: 'ACOMPAÑAMIENTO ADUANERO',
         title: 'Trámites aduaneros gestionados de principio a fin',
         description:
