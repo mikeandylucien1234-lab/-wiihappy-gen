@@ -69,7 +69,6 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
   const overlayActive = overlay && isMobileViewport
   const solid = !overlayActive || heroPassed || menuOpen
   const textColor = solid ? 'text-ink' : 'text-white'
-  const mutedColor = solid ? 'text-slate' : 'text-white/75'
 
   return (
     <header
@@ -79,12 +78,47 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
         solid ? cn('bg-white', scrolled && 'bg-white/[0.96] shadow-[0_4px_20px_rgba(10,42,102,0.08)] backdrop-blur-sm') : 'bg-transparent',
       )}
     >
-      <div className="mx-auto flex max-w-content items-center gap-x-3 gap-y-2.5 px-4 py-4 sm:gap-x-6 sm:px-6">
+      {/* Utility bar: desktop only. Overlay is mobile-only, so this row never needs
+          the transparent/light treatment — it can stay statically styled. */}
+      <div className="hidden border-b border-navy/[0.06] bg-surface md:block">
+        <div className="mx-auto flex max-w-content items-center gap-6 px-6 py-2 text-[13px]">
+          <div className="mr-auto flex items-center gap-2 whitespace-nowrap">
+            <span className="font-extrabold text-ink">{t.header.phone}</span>
+            <span className="text-muted">·</span>
+            <span className="text-slate">{t.header.hours}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            {locales.map((l) => (
+              <button
+                key={l}
+                type="button"
+                onClick={() => setLocale(l)}
+                aria-current={locale === l}
+                className={cn(
+                  'rounded-md px-2 py-1 text-xs font-bold uppercase transition-colors',
+                  locale === l ? 'bg-primary/10 text-primary' : 'text-slate',
+                )}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
+          <Link to={user ? '/mon-compte' : '/connexion'} className="flex items-center gap-1.5 whitespace-nowrap font-bold text-ink">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21c0-4 3.6-6 8-6s8 2 8 6" />
+            </svg>
+            {user ? t.header.myAccount : t.header.login}
+          </Link>
+        </div>
+      </div>
+
+      <div className="mx-auto flex max-w-content items-center gap-x-3 gap-y-2.5 px-4 py-3.5 sm:gap-x-6 sm:px-6">
         <Link to="/" className="flex flex-none items-baseline" onClick={closeMenu}>
           <Logo variant={solid ? 'dark' : 'light'} className="h-7 sm:h-8" />
         </Link>
 
-        <nav className="mx-auto hidden flex-wrap items-start gap-[26px] md:flex">
+        <nav className="mx-auto hidden items-start gap-7 md:flex lg:gap-9">
           <div className="flex flex-col items-center gap-1.5">
             <Link to="/" hash="hero" className={cn('whitespace-nowrap text-[14.5px] font-bold transition-colors', textColor)}>
               {t.header.home}
@@ -103,43 +137,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
           ))}
         </nav>
 
-        <div className="ml-auto flex flex-none items-center gap-2 sm:gap-3 md:gap-[18px]">
-          <div className="hidden items-center gap-1 md:flex">
-            {locales.map((l) => (
-              <button
-                key={l}
-                type="button"
-                onClick={() => setLocale(l)}
-                aria-current={locale === l}
-                className={cn(
-                  'rounded-md px-2 py-1 text-xs font-bold uppercase transition-colors',
-                  solid
-                    ? locale === l
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-slate'
-                    : locale === l
-                      ? 'bg-white/20 text-white'
-                      : 'text-white/70',
-                )}
-              >
-                {l}
-              </button>
-            ))}
-          </div>
-          <Link
-            to={user ? '/mon-compte' : '/connexion'}
-            className={cn('hidden items-center gap-1.5 whitespace-nowrap text-[13.5px] font-bold transition-colors sm:flex', textColor)}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <circle cx="12" cy="8" r="4" />
-              <path d="M4 21c0-4 3.6-6 8-6s8 2 8 6" />
-            </svg>
-            {user ? t.header.myAccount : t.header.login}
-          </Link>
-          <div className={cn('hidden text-[13.5px] leading-tight transition-colors md:block', textColor)}>
-            <div className="font-extrabold">{t.header.phone}</div>
-            <div className={cn('text-xs', mutedColor)}>{t.header.hours}</div>
-          </div>
+        <div className="ml-auto flex flex-none items-center gap-2 sm:gap-3">
           <Button
             variant="accent"
             onClick={() => openDrawer()}
