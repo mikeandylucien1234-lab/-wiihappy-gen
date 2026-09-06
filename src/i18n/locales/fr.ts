@@ -71,6 +71,14 @@ export const fr = {
     scrollCta: 'Découvrir la suite',
     trustCount: '500+',
     trustLabel: 'clients nous font confiance',
+    marquee: [
+      'Sourcing fiable',
+      'Importation & exportation',
+      'Conformité douanière',
+      'Suivi personnalisé',
+      '+500 clients satisfaits',
+      'Livraison partout dans le monde',
+    ],
   },
 
   about: {

@@ -11,6 +11,7 @@ import { GlobalReach } from '@/components/sections/GlobalReach'
 import { GlobalReachMobile } from '@/components/sections/GlobalReachMobile'
 import { Header } from '@/components/sections/Header'
 import { Hero } from '@/components/sections/Hero'
+import { HeroMarquee } from '@/components/sections/HeroMarquee'
 import { LocationMap } from '@/components/sections/LocationMap'
 import { Services } from '@/components/sections/Services'
 import { VisionStats } from '@/components/sections/VisionStats'
@@ -24,6 +25,7 @@ function LandingPage() {
     <div className="overflow-x-hidden bg-surface text-ink">
       <Header overlay />
       <Hero />
+      <HeroMarquee />
       <Services />
       <DirectorQuote />
       <Categories />

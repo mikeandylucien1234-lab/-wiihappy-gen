@@ -95,9 +95,14 @@ export default {
           '70%': { boxShadow: '0 0 0 12px rgba(255,140,0,0)' },
           '100%': { boxShadow: '0 0 0 0 rgba(255,140,0,0)' },
         },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         'pulse-dot': 'pulseDot 2s infinite',
+        marquee: 'marquee 18s linear infinite',
       },
     },
   },

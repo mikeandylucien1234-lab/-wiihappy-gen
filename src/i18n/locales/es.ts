@@ -62,6 +62,14 @@ export const es: typeof fr = {
     scrollCta: 'Descubrir más',
     trustCount: '500+',
     trustLabel: 'clientes confían en nosotros',
+    marquee: [
+      'Sourcing confiable',
+      'Importación y exportación',
+      'Cumplimiento aduanero',
+      'Seguimiento personalizado',
+      '+500 clientes satisfechos',
+      'Entrega en todo el mundo',
+    ],
   },
 
   about: {

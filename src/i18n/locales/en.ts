@@ -62,6 +62,14 @@ export const en: typeof fr = {
     scrollCta: 'Discover more',
     trustCount: '500+',
     trustLabel: 'clients trust us',
+    marquee: [
+      'Reliable sourcing',
+      'Import & export',
+      'Customs compliance',
+      'Personalized follow-up',
+      '+500 satisfied clients',
+      'Delivery worldwide',
+    ],
   },
 
   about: {
