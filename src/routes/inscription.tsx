@@ -15,7 +15,7 @@ export const Route = createFileRoute('/inscription')({
 })
 
 function Inscription() {
-  const { signUp } = useAuth()
+  const { signUp, signOut } = useAuth()
   const navigate = useNavigate()
   const { redirect } = Route.useSearch()
   const { t } = useLocale()
@@ -26,7 +26,6 @@ function Inscription() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
-  const [needsConfirmation, setNeedsConfirmation] = useState(false)
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -42,36 +41,20 @@ function Inscription() {
     }
 
     setLoading(true)
-    const { error, needsEmailConfirmation } = await signUp(email.trim(), password)
-    setLoading(false)
+    const { error } = await signUp(email.trim(), password)
 
     if (error) {
+      setLoading(false)
       setError(error)
       return
     }
-    if (needsEmailConfirmation) {
-      setNeedsConfirmation(true)
-      return
-    }
-    navigate({ to: redirect || '/mon-compte' })
-  }
 
-  if (needsConfirmation) {
-    return (
-      <AuthShell title={i.confirmTitle} subtitle={i.confirmSubtitle}>
-        <div className="rounded-xl bg-gradient-primary-diag p-8 text-center text-white">
-          <div className="mb-3 text-4xl">✓</div>
-          <p className="text-white/90">
-            {i.confirmBodyPrefix} <strong>{email}</strong>. {i.confirmBodySuffix}
-          </p>
-        </div>
-        <p className="mt-6 text-center text-sm text-slate">
-          <Link to="/connexion" className="font-bold text-primary">
-            {i.goToLogin}
-          </Link>
-        </p>
-      </AuthShell>
-    )
+    // Account created — send them to log in explicitly rather than relying on
+    // whatever session signUp may have opened (email confirmation is disabled
+    // project-side, so this is purely "go log in", not an auth-state fix-up).
+    await signOut()
+    setLoading(false)
+    navigate({ to: '/connexion', search: { redirect } })
   }
 
   return (

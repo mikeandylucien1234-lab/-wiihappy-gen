@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui'
-import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
+import { useCallbackForm } from '@/features/callback/CallbackFormContext'
 import { useLocale } from '@/i18n/LocaleContext'
 
 export const featureMeta = [
@@ -31,7 +31,7 @@ export const featureMeta = [
 ] as const
 
 export function GlobalReach() {
-  const { openDrawer } = useQuoteForm()
+  const { openDrawer } = useCallbackForm()
   const { t } = useLocale()
 
   return (
@@ -57,8 +57,8 @@ export function GlobalReach() {
               </div>
             )
           })}
-          <Button variant="accent" onClick={() => openDrawer()} className="mt-1.5 self-start">
-            {t.globalReach.cta} <span>→</span>
+          <Button variant="accent" onClick={openDrawer} className="mt-1.5 self-start">
+            {t.globalReach.ctaMobile} <span>→</span>
           </Button>
         </div>
 
