@@ -1,5 +1,5 @@
 import { Button, Card } from '@/components/ui'
-import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
+import { useBookingForm } from '@/features/booking/BookingFormContext'
 import { useLocale } from '@/i18n/LocaleContext'
 
 interface InfoCardProps {
@@ -58,12 +58,8 @@ const cardIcons = [IconStrategy, IconCompliance, IconCosts, IconFollowUp]
 const cardGradients = ['bg-gradient-primary-diag', 'bg-gradient-primary-diag', 'bg-gradient-accent-diag', 'bg-gradient-accent-diag']
 
 export function Consultation() {
-  const { openDrawer } = useQuoteForm()
+  const { openDrawer } = useBookingForm()
   const { t } = useLocale()
-
-  function openConsultation() {
-    openDrawer({ description: t.consultation.descriptionPrefix, sourcePage: 'consultation' })
-  }
 
   const [card1, card2, card3, card4] = t.consultation.cards
   const [Icon1, Icon2, Icon3, Icon4] = cardIcons
@@ -101,7 +97,7 @@ export function Consultation() {
         </div>
 
         <div className="mt-10 text-center">
-          <Button variant="accent" size="lg" onClick={openConsultation} className="font-extrabold">
+          <Button variant="accent" size="lg" onClick={openDrawer} className="font-extrabold">
             {t.consultation.cta} <span>→</span>
           </Button>
         </div>
