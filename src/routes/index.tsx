@@ -8,6 +8,7 @@ import { DirectorQuote } from '@/components/sections/DirectorQuote'
 import { Faq } from '@/components/sections/Faq'
 import { Footer } from '@/components/sections/Footer'
 import { GlobalReach } from '@/components/sections/GlobalReach'
+import { GlobalReachMobile } from '@/components/sections/GlobalReachMobile'
 import { Header } from '@/components/sections/Header'
 import { Hero } from '@/components/sections/Hero'
 import { Services } from '@/components/sections/Services'
@@ -27,9 +28,12 @@ function LandingPage() {
       <div className="md:hidden">
         <AboutIntro />
         <ConsultationBanner />
+        <GlobalReachMobile />
       </div>
-      <About />
-      <GlobalReach />
+      <div className="hidden md:block">
+        <About />
+        <GlobalReach />
+      </div>
       <div className="hidden md:block">
         <Consultation />
       </div>

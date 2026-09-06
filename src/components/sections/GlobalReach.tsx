@@ -2,7 +2,7 @@ import { Button, ImagePlaceholder } from '@/components/ui'
 import { useQuoteForm } from '@/features/quote-form/QuoteFormContext'
 import { useLocale } from '@/i18n/LocaleContext'
 
-const featureMeta = [
+export const featureMeta = [
   {
     color: '#0057D9',
     iconBg: 'bg-primary/10',
