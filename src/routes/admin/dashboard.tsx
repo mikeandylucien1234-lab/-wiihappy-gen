@@ -40,14 +40,22 @@ function AdminDashboard() {
       <h1 className="mb-1 text-2xl font-extrabold tracking-[-0.5px] text-ink">{d.greeting(adminUser.name.split(' ')[0])}</h1>
       <p className="mb-6 text-sm text-slate">{d.subtitle}</p>
 
-      <div className="mb-8 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5">
+      <div className="mb-8 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
         {statCards.map((card) => (
-          <Card key={card.key} radius="lg" padding="md" shadow="none" className="border-[1.5px] border-navy/[0.08]">
-            <div className={`mb-3 inline-flex h-9 w-9 items-center justify-center rounded-md text-sm font-extrabold ${card.color}`}>
+          <Card
+            key={card.key}
+            radius="lg"
+            padding="md"
+            shadow="none"
+            className="border-[1.5px] border-navy/[0.08] p-4 sm:p-[30px]"
+          >
+            <div
+              className={`mb-2.5 inline-flex h-8 w-8 items-center justify-center rounded-md text-xs font-extrabold sm:mb-3 sm:h-9 sm:w-9 sm:text-sm ${card.color}`}
+            >
               {stats[card.key]}
             </div>
-            <div className="text-2xl font-extrabold text-ink">{isLoading ? '—' : stats[card.key]}</div>
-            <div className="text-sm text-slate">{card.label}</div>
+            <div className="text-xl font-extrabold text-ink sm:text-2xl">{isLoading ? '—' : stats[card.key]}</div>
+            <div className="text-xs text-slate sm:text-sm">{card.label}</div>
           </Card>
         ))}
       </div>
