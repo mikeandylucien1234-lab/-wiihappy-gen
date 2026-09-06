@@ -207,7 +207,7 @@ export const en: typeof fr = {
   },
 
   quoteFab: {
-    tooltip: 'Request a quote',
+    tooltip: 'Chat on WhatsApp',
     whatsappMessage: 'Hello, I would like to request a quote.',
   },
 

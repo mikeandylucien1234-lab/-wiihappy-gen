@@ -9,9 +9,9 @@ export function ServiceCta({ service }: { service: ServiceMeta }) {
   const content = t.servicePages.pages[service.slug]
 
   return (
-    <section className="mx-auto max-w-content px-6 pt-[100px]">
+    <section className="mx-auto max-w-content px-6 pt-8">
       <div className="rounded-3xl bg-gradient-hero px-8 py-16 text-center text-white">
-        <h2 className="mx-auto mb-3 max-w-[560px] text-h2">{content.ctaTitle}</h2>
+        <h1 className="mx-auto mb-3 max-w-[560px] text-h2">{content.ctaTitle}</h1>
         <p className="mx-auto mb-8 max-w-[480px] text-base text-white/85">{content.ctaDescription}</p>
         <Button
           variant="accent"

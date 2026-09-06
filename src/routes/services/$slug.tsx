@@ -2,9 +2,7 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { Footer } from '@/components/sections/Footer'
 import { Header } from '@/components/sections/Header'
 import { ServiceBreadcrumb } from '@/components/sections/service/ServiceBreadcrumb'
-import { ServiceCategories } from '@/components/sections/service/ServiceCategories'
 import { ServiceCta } from '@/components/sections/service/ServiceCta'
-import { ServiceHero } from '@/components/sections/service/ServiceHero'
 import { ServiceSteps } from '@/components/sections/service/ServiceSteps'
 import { getServiceBySlug } from '@/features/services/data'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -26,10 +24,8 @@ function ServicePage() {
     <div className="overflow-x-hidden bg-surface text-ink">
       <Header />
       <ServiceBreadcrumb service={service} />
-      <ServiceHero service={service} />
-      <ServiceSteps service={service} />
-      <ServiceCategories service={service} />
       <ServiceCta service={service} />
+      <ServiceSteps service={service} />
       <Footer />
     </div>
   )
