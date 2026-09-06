@@ -44,6 +44,7 @@ export default {
         'gradient-footer': 'linear-gradient(135deg,#061A4A,#0057D9)',
         'gradient-fab': 'linear-gradient(135deg,#00C2FF,#0057D9,#FF8C00)',
         'gradient-avatar-neutral': 'linear-gradient(135deg,#9AA5B4,#5B6B82)',
+        'gradient-stats': 'linear-gradient(115deg,#5B21B6,#0057D9,#00C2FF)',
       },
       fontFamily: {
         sans: ['Manrope', 'system-ui', '-apple-system', 'sans-serif'],

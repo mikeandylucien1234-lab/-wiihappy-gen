@@ -102,6 +102,15 @@ export const en: typeof fr = {
     imageLabel: 'Photo of the director',
   },
 
+  visionStats: {
+    items: [
+      { value: 1, prefix: '+', suffix: '', title: 'VISION', text: 'A new adventure' },
+      { value: 1, prefix: '+', suffix: '', title: 'MISSION', text: 'An ambition to build' },
+      { value: null, prefix: '+', suffix: '', title: 'POSSIBILITIES', text: 'A future to imagine' },
+      { value: 100, prefix: '', suffix: '%', title: 'COMMITMENT', text: 'A determined team' },
+    ],
+  },
+
   globalReach: {
     eyebrow: 'OUR REACH',
     title: 'From China to your door, anywhere in the world',

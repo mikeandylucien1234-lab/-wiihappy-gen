@@ -12,6 +12,7 @@ import { GlobalReachMobile } from '@/components/sections/GlobalReachMobile'
 import { Header } from '@/components/sections/Header'
 import { Hero } from '@/components/sections/Hero'
 import { Services } from '@/components/sections/Services'
+import { VisionStats } from '@/components/sections/VisionStats'
 
 export const Route = createFileRoute('/')({
   component: LandingPage,
@@ -34,6 +35,7 @@ function LandingPage() {
         <About />
         <GlobalReach />
       </div>
+      <VisionStats />
       <div className="hidden md:block">
         <Consultation />
       </div>

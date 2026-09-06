@@ -111,6 +111,15 @@ export const fr = {
     imageLabel: 'Photo du directeur',
   },
 
+  visionStats: {
+    items: [
+      { value: 1, prefix: '+', suffix: '', title: 'VISION', text: 'Une nouvelle aventure' },
+      { value: 1, prefix: '+', suffix: '', title: 'MISSION', text: 'Une ambition à construire' },
+      { value: null, prefix: '+', suffix: '', title: 'POSSIBILITÉS', text: 'Un avenir à imaginer' },
+      { value: 100, prefix: '', suffix: '%', title: 'ENGAGEMENT', text: 'Une équipe déterminée' },
+    ],
+  },
+
   globalReach: {
     eyebrow: 'NOTRE PORTÉE',
     title: 'De la Chine à votre porte, partout dans le monde',
