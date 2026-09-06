@@ -1,16 +1,17 @@
 import { cn } from '@/lib/cn'
 
 export interface LogoProps {
-  /** 'dark' for light backgrounds (header), 'light' for dark backgrounds (footer, hero banner). */
+  /** 'light' adds a drop shadow so the mark stays legible over photos/video (e.g. the transparent header on the mobile hero). */
   variant?: 'dark' | 'light'
   className?: string
 }
 
 export function Logo({ variant = 'dark', className }: LogoProps) {
   return (
-    <span className={cn('flex items-baseline text-2xl font-extrabold tracking-tight', className)}>
-      <span className={variant === 'dark' ? 'text-primary' : 'text-white'}>Wii</span>
-      <span className="text-accent">happy</span>
-    </span>
+    <img
+      src="/images/wiihappy-logo.png"
+      alt="Wiihappy"
+      className={cn('h-8 w-auto object-contain', variant === 'light' && 'drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]', className)}
+    />
   )
 }

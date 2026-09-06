@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router'
+import { Logo } from '@/components/ui'
 import { adminNavItems } from '@/features/admin/nav'
 import { useLocale } from '@/i18n/LocaleContext'
 import type { AdminRole } from '@/lib/database.types'
@@ -39,7 +40,7 @@ export function AdminSidebar({ name, role, mobileOpen, onClose }: AdminSidebarPr
       >
         <div className="flex flex-none items-center justify-between gap-2.5 px-5 py-[22px]">
           <div className="flex items-center gap-2.5">
-            <span className="text-xl font-extrabold tracking-tight text-primary">Wii<span className="text-accent">happy</span></span>
+            <Logo className="h-7" />
             <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-slate">Admin</span>
           </div>
           <button

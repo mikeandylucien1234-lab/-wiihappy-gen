@@ -66,7 +66,7 @@ export function VisionStats() {
   const { ref, inView } = useInView<HTMLDivElement>()
 
   return (
-    <section className="hidden md:block bg-gradient-stats px-6 py-16">
+    <section className="hidden md:block bg-gradient-stats px-6 py-16 mt-20">
       <div ref={ref} className="mx-auto grid max-w-content grid-cols-4 gap-8 text-center text-white">
         {t.visionStats.items.map((item) => (
           <div key={item.title}>

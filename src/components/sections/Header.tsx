@@ -81,7 +81,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
     >
       <div className="mx-auto flex max-w-content items-center gap-x-3 gap-y-2.5 px-4 py-4 sm:gap-x-6 sm:px-6">
         <Link to="/" className="flex flex-none items-baseline" onClick={closeMenu}>
-          <Logo variant={solid ? 'dark' : 'light'} className="text-xl sm:text-2xl" />
+          <Logo variant={solid ? 'dark' : 'light'} className="h-7 sm:h-8" />
         </Link>
 
         <nav className="mx-auto hidden flex-wrap items-start gap-[26px] md:flex">
