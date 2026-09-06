@@ -37,12 +37,10 @@ export const en: typeof fr = {
 
   footer: {
     tagline: 'International brokerage and sourcing — vehicles, agri-food, textiles, electronics.',
-    navTitle: 'Navigation',
-    navHome: 'Home',
-    navServices: 'Services',
-    navComment: 'How it works',
-    navCategories: 'Categories',
-    navFaq: 'FAQ',
+    policyTitle: 'Policy',
+    privacyPolicy: 'Privacy Policy',
+    termsOfService: 'Terms of Service',
+    legalNotice: 'Legal Notice',
     contactTitle: 'Contact',
     contactEmail: 'contact@wiihappy.com',
     contactWhatsapp: 'WhatsApp +56 9 8363 4549',

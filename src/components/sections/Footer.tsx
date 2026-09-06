@@ -24,12 +24,10 @@ const socialIcons = [
 export function Footer() {
   const { locale, setLocale, t } = useLocale()
 
-  const navLinks = [
-    { label: t.footer.navHome, hash: 'hero' },
-    { label: t.footer.navServices, hash: 'services' },
-    { label: t.footer.navComment, hash: 'comment' },
-    { label: t.footer.navCategories, hash: 'categories' },
-    { label: t.footer.navFaq, hash: 'faq' },
+  const policyLinks = [
+    { label: t.footer.privacyPolicy, to: '/politique-confidentialite' as const },
+    { label: t.footer.termsOfService, to: '/conditions-utilisation' as const },
+    { label: t.footer.legalNotice, to: '/mentions-legales' as const },
   ]
 
   return (
@@ -41,10 +39,10 @@ export function Footer() {
         </div>
 
         <div>
-          <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">{t.footer.navTitle}</h5>
+          <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">{t.footer.policyTitle}</h5>
           <div className="flex flex-col gap-2.5">
-            {navLinks.map((link) => (
-              <Link key={link.hash} to="/" hash={link.hash} className="text-[14.5px] text-white/75">
+            {policyLinks.map((link) => (
+              <Link key={link.to} to={link.to} className="text-[14.5px] text-white/75">
                 {link.label}
               </Link>
             ))}

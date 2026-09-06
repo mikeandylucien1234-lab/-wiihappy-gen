@@ -37,12 +37,10 @@ export const es: typeof fr = {
 
   footer: {
     tagline: 'Corretaje y sourcing internacional — vehículos, agroalimentario, textil, electrónica.',
-    navTitle: 'Navegación',
-    navHome: 'Inicio',
-    navServices: 'Servicios',
-    navComment: 'Cómo funciona',
-    navCategories: 'Categorías',
-    navFaq: 'Preguntas frecuentes',
+    policyTitle: 'Política',
+    privacyPolicy: 'Política de privacidad',
+    termsOfService: 'Términos de uso',
+    legalNotice: 'Aviso legal',
     contactTitle: 'Contacto',
     contactEmail: 'contact@wiihappy.com',
     contactWhatsapp: 'WhatsApp +56 9 8363 4549',

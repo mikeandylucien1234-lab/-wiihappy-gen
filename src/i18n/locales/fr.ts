@@ -46,12 +46,10 @@ export const fr = {
 
   footer: {
     tagline: 'Courtage et sourcing international — véhicules, agroalimentaire, textile, électronique.',
-    navTitle: 'Navigation',
-    navHome: 'Accueil',
-    navServices: 'Services',
-    navComment: 'Comment ça marche',
-    navCategories: 'Catégories',
-    navFaq: 'FAQ',
+    policyTitle: 'Politique',
+    privacyPolicy: 'Politique de confidentialité',
+    termsOfService: "Conditions d'utilisation",
+    legalNotice: 'Mentions légales',
     contactTitle: 'Contact',
     contactEmail: 'contact@wiihappy.com',
     contactWhatsapp: 'WhatsApp +56 9 8363 4549',
