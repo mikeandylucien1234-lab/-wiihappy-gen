@@ -192,6 +192,7 @@ export const en: typeof fr = {
 
   quoteFab: {
     tooltip: 'Request a quote',
+    whatsappMessage: 'Hello, I would like to request a quote.',
   },
 
   quoteDrawer: {

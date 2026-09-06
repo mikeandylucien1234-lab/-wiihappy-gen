@@ -202,6 +202,7 @@ export const fr = {
 
   quoteFab: {
     tooltip: 'Demander un devis',
+    whatsappMessage: 'Bonjour, je souhaite demander un devis.',
   },
 
   quoteDrawer: {

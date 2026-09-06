@@ -193,6 +193,7 @@ export const es: typeof fr = {
 
   quoteFab: {
     tooltip: 'Solicitar presupuesto',
+    whatsappMessage: 'Hola, quisiera solicitar un presupuesto.',
   },
 
   quoteDrawer: {
