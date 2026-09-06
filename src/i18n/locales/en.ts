@@ -500,6 +500,7 @@ export const en: typeof fr = {
       statistiques: 'Statistics',
       equipe: 'Team & roles',
       reservations: 'Reservations',
+      callbacks: 'Callbacks',
       notifications: 'Notifications',
       parametres: 'Settings',
     },
@@ -726,6 +727,25 @@ export const en: typeof fr = {
       },
       nextStatus: 'Next status',
     },
+    callbacks: {
+      title: 'Callback requests',
+      subtitle: '"Let us call you" requests sent from the public site.',
+      loading: 'Loading...',
+      error: 'Could not load callback requests.',
+      empty: 'No callback requests yet.',
+      colName: 'Name',
+      colWhatsapp: 'WhatsApp',
+      colEmail: 'Email',
+      colDate: 'Received',
+      colStatus: 'Status',
+      colAction: 'Action',
+      statusUpdateError: 'Failed to update status.',
+      statusLabels: {
+        nouveau: 'New',
+        contacte: 'Contacted',
+        annule: 'Cancelled',
+      },
+    },
   },
   booking: {
     header: {
@@ -787,6 +807,29 @@ export const en: typeof fr = {
     nav: {
       previous: 'Previous',
       next: 'Next',
+    },
+  },
+
+  callback: {
+    header: {
+      title: 'Let us call you',
+      subtitle: "Share your details, one of our advisors will call you back shortly.",
+      close: 'Close',
+    },
+    fields: {
+      name: 'Full name',
+      namePlaceholder: 'John Smith',
+      whatsapp: 'WhatsApp',
+      whatsappPlaceholder: '+1 555 123 4567',
+      email: 'Email',
+      emailPlaceholder: 'john@example.com',
+    },
+    submit: 'Ask to be called back',
+    sending: 'Sending...',
+    success: {
+      title: 'Request sent!',
+      body: (name: string) => `Thank you ${name}, our team will contact you shortly by WhatsApp or email.`,
+      backHome: 'Back to home',
     },
   },
 }

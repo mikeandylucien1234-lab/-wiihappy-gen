@@ -513,6 +513,7 @@ export const fr = {
       statistiques: 'Statistiques',
       equipe: 'Équipe & rôles',
       reservations: 'Réservations',
+      callbacks: 'Rappels',
       notifications: 'Notifications',
       parametres: 'Paramètres',
     },
@@ -739,6 +740,25 @@ export const fr = {
       },
       nextStatus: 'Statut suivant',
     },
+    callbacks: {
+      title: 'Demandes de rappel',
+      subtitle: 'Demandes "Laissez-nous vous appeler" envoyées depuis le site public.',
+      loading: 'Chargement...',
+      error: 'Impossible de charger les demandes de rappel.',
+      empty: 'Aucune demande de rappel pour le moment.',
+      colName: 'Nom',
+      colWhatsapp: 'WhatsApp',
+      colEmail: 'Email',
+      colDate: 'Reçu le',
+      colStatus: 'Statut',
+      colAction: 'Action',
+      statusUpdateError: 'Échec de la mise à jour du statut.',
+      statusLabels: {
+        nouveau: 'Nouveau',
+        contacte: 'Contacté',
+        annule: 'Annulé',
+      },
+    },
   },
   booking: {
     header: {
@@ -800,6 +820,29 @@ export const fr = {
     nav: {
       previous: 'Précédent',
       next: 'Suivant',
+    },
+  },
+
+  callback: {
+    header: {
+      title: 'Laissez-nous vous appeler',
+      subtitle: 'Indiquez vos coordonnées, un conseiller vous rappelle rapidement.',
+      close: 'Fermer',
+    },
+    fields: {
+      name: 'Nom complet',
+      namePlaceholder: 'Jean Dupont',
+      whatsapp: 'WhatsApp',
+      whatsappPlaceholder: '+33 6 12 34 56 78',
+      email: 'Email',
+      emailPlaceholder: 'jean@exemple.com',
+    },
+    submit: 'Demander à être rappelé',
+    sending: 'Envoi en cours...',
+    success: {
+      title: 'Demande envoyée !',
+      body: (name: string) => `Merci ${name}, notre équipe vous contactera très rapidement par WhatsApp ou email.`,
+      backHome: 'Retour à l’accueil',
     },
   },
 }

@@ -18,6 +18,7 @@ export type AdminRole = 'Admin' | 'Agent' | 'Lecture seule'
 export type Locale = 'fr' | 'en' | 'es'
 export type ReservationMotif = 'Importation' | 'Exportation' | 'Sourcing personnalisé' | 'Question générale'
 export type ReservationStatut = 'en_attente' | 'confirme' | 'annule' | 'effectue'
+export type CallbackStatut = 'nouveau' | 'contacte' | 'annule'
 
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
@@ -284,6 +285,33 @@ export type Database = {
             referencedColumns: ['id']
           },
         ]
+      }
+      callback_requests: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          nom_complet: string
+          statut: CallbackStatut
+          whatsapp: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          nom_complet: string
+          statut?: CallbackStatut
+          whatsapp: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          nom_complet?: string
+          statut?: CallbackStatut
+          whatsapp?: string
+        }
+        Relationships: []
       }
       reservations: {
         Row: {

@@ -1,9 +1,11 @@
 import { Outlet, createRootRoute, useRouterState } from '@tanstack/react-router'
 import { BookingDrawer } from '@/components/sections/booking/BookingDrawer'
+import { CallbackDrawer } from '@/components/sections/callback/CallbackDrawer'
 import { QuoteDrawer } from '@/components/sections/QuoteDrawer'
 import { QuoteFab } from '@/components/sections/QuoteFab'
 import { AuthProvider } from '@/features/auth/AuthContext'
 import { BookingFormProvider } from '@/features/booking/BookingFormContext'
+import { CallbackFormProvider } from '@/features/callback/CallbackFormContext'
 import { QuoteFormProvider } from '@/features/quote-form/QuoteFormContext'
 import { LocaleProvider } from '@/i18n/LocaleContext'
 
@@ -19,14 +21,17 @@ function RootLayout() {
       <AuthProvider>
         <QuoteFormProvider>
           <BookingFormProvider>
-            <Outlet />
-            {!isAdmin && (
-              <>
-                <QuoteDrawer />
-                <QuoteFab />
-                <BookingDrawer />
-              </>
-            )}
+            <CallbackFormProvider>
+              <Outlet />
+              {!isAdmin && (
+                <>
+                  <QuoteDrawer />
+                  <QuoteFab />
+                  <BookingDrawer />
+                  <CallbackDrawer />
+                </>
+              )}
+            </CallbackFormProvider>
           </BookingFormProvider>
         </QuoteFormProvider>
       </AuthProvider>

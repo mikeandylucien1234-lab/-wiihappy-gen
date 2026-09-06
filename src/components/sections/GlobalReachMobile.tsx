@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui'
-import { useBookingForm } from '@/features/booking/BookingFormContext'
+import { useCallbackForm } from '@/features/callback/CallbackFormContext'
 import { useLocale } from '@/i18n/LocaleContext'
 import { featureMeta } from './GlobalReach'
 
 export function GlobalReachMobile() {
-  const { openDrawer } = useBookingForm()
+  const { openDrawer } = useCallbackForm()
   const { t } = useLocale()
 
   return (

@@ -11,6 +11,7 @@ export interface AdminNavItem {
     | 'statistiques'
     | 'equipe'
     | 'reservations'
+    | 'callbacks'
     | 'notifications'
     | 'parametres'
   to: string
@@ -111,6 +112,15 @@ export const adminNavItems: AdminNavItem[] = [
         <rect x="3" y="4" width="18" height="17" rx="2" />
         <path d="M3 9h18M8 2v4M16 2v4" />
         <path d="M8 13h2m4 0h2M8 17h2m4 0h2" />
+      </>
+    ),
+  },
+  {
+    id: 'callbacks',
+    to: '/admin/callbacks',
+    icon: (
+      <>
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1 .36 1.98.68 2.92a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.16-1.16a2 2 0 0 1 2.11-.45c.94.32 1.92.55 2.92.68A2 2 0 0 1 22 16.92z" />
       </>
     ),
   },

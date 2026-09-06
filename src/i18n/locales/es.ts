@@ -505,6 +505,7 @@ export const es: typeof fr = {
       statistiques: 'Estadísticas',
       equipe: 'Equipo y roles',
       reservations: 'Reservas',
+      callbacks: 'Solicitudes de llamada',
       notifications: 'Notificaciones',
       parametres: 'Configuración',
     },
@@ -731,6 +732,25 @@ export const es: typeof fr = {
       },
       nextStatus: 'Siguiente estado',
     },
+    callbacks: {
+      title: 'Solicitudes de llamada',
+      subtitle: 'Solicitudes "Deje que le llamemos" enviadas desde el sitio público.',
+      loading: 'Cargando...',
+      error: 'No se pudieron cargar las solicitudes de llamada.',
+      empty: 'Aún no hay solicitudes de llamada.',
+      colName: 'Nombre',
+      colWhatsapp: 'WhatsApp',
+      colEmail: 'Email',
+      colDate: 'Recibido el',
+      colStatus: 'Estado',
+      colAction: 'Acción',
+      statusUpdateError: 'Error al actualizar el estado.',
+      statusLabels: {
+        nouveau: 'Nuevo',
+        contacte: 'Contactado',
+        annule: 'Cancelado',
+      },
+    },
   },
   booking: {
     header: {
@@ -792,6 +812,29 @@ export const es: typeof fr = {
     nav: {
       previous: 'Anterior',
       next: 'Siguiente',
+    },
+  },
+
+  callback: {
+    header: {
+      title: 'Deje que le llamemos',
+      subtitle: 'Indique sus datos, un asesor le llamará muy pronto.',
+      close: 'Cerrar',
+    },
+    fields: {
+      name: 'Nombre completo',
+      namePlaceholder: 'Juan Pérez',
+      whatsapp: 'WhatsApp',
+      whatsappPlaceholder: '+34 612 345 678',
+      email: 'Email',
+      emailPlaceholder: 'juan@ejemplo.com',
+    },
+    submit: 'Solicitar que me llamen',
+    sending: 'Enviando...',
+    success: {
+      title: '¡Solicitud enviada!',
+      body: (name: string) => `Gracias ${name}, nuestro equipo le contactará muy pronto por WhatsApp o email.`,
+      backHome: 'Volver al inicio',
     },
   },
 }
