@@ -286,6 +286,48 @@ export type Database = {
           },
         ]
       }
+      faq_items: {
+        Row: {
+          active: boolean
+          answer_en: string
+          answer_es: string
+          answer_fr: string
+          created_at: string
+          id: string
+          question_en: string
+          question_es: string
+          question_fr: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          answer_en: string
+          answer_es: string
+          answer_fr: string
+          created_at?: string
+          id?: string
+          question_en: string
+          question_es: string
+          question_fr: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          answer_en?: string
+          answer_es?: string
+          answer_fr?: string
+          created_at?: string
+          id?: string
+          question_en?: string
+          question_es?: string
+          question_fr?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       callback_requests: {
         Row: {
           created_at: string

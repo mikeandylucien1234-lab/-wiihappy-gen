@@ -8,6 +8,8 @@ export interface AdminNavItem {
     | 'paiements'
     | 'categories'
     | 'contenu'
+    | 'politiques'
+    | 'faq'
     | 'statistiques'
     | 'equipe'
     | 'reservations'
@@ -84,6 +86,27 @@ export const adminNavItems: AdminNavItem[] = [
       <>
         <rect x="4" y="3" width="16" height="18" rx="2" />
         <path d="M8 8h8M8 12h8M8 16h5" />
+      </>
+    ),
+  },
+  {
+    id: 'politiques',
+    to: '/admin/politiques',
+    icon: (
+      <>
+        <path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z" />
+        <path d="M9 12l2 2 4-4" />
+      </>
+    ),
+  },
+  {
+    id: 'faq',
+    to: '/admin/faq',
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.7-2.2 2-2.5 3.5" />
+        <circle cx="12" cy="16.5" r="0.6" fill="currentColor" stroke="none" />
       </>
     ),
   },
