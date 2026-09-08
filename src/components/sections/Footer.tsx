@@ -6,6 +6,8 @@ import type { Locale } from '@/lib/database.types'
 
 const locales: Locale[] = ['fr', 'en', 'es']
 
+const WHATSAPP_NUMBER = '56983634549'
+
 const socialIcons = [
   {
     label: 'Facebook',
@@ -52,8 +54,17 @@ export function Footer() {
         <div>
           <h5 className="mb-4 text-sm font-extrabold uppercase tracking-[0.05em] text-white">{t.footer.contactTitle}</h5>
           <div className="flex flex-col gap-2.5 text-[14.5px] text-white/75">
-            <span>{t.footer.contactEmail}</span>
-            <span>{t.footer.contactWhatsapp}</span>
+            <a href={`mailto:${t.footer.contactEmail}`} className="hover:text-white">
+              {t.footer.contactEmail}
+            </a>
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white"
+            >
+              {t.footer.contactWhatsapp}
+            </a>
             <span>{t.footer.contactHours}</span>
           </div>
         </div>
