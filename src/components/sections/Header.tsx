@@ -31,11 +31,11 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
   const { locale, setLocale, t } = useLocale()
 
   const navItems = [
-    { label: t.header.navServices, hash: 'services' },
-    { label: t.header.navComment, hash: 'comment' },
-    { label: t.header.navCategories, hash: 'categories' },
-    { label: t.header.navFaq, hash: 'faq' },
-    { label: t.header.navContact, hash: 'footer' },
+    { label: t.header.navServices, to: '/' as const, hash: 'services' },
+    { label: t.header.navComment, to: '/' as const, hash: 'comment' },
+    { label: t.header.navCategories, to: '/' as const, hash: 'categories' },
+    { label: t.header.navFaq, to: '/' as const, hash: 'faq' },
+    { label: t.header.navContact, to: '/contact' as const, hash: undefined },
   ]
 
   useEffect(() => {
@@ -127,8 +127,8 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
           </div>
           {navItems.map((item) => (
             <Link
-              key={item.hash}
-              to="/"
+              key={item.label}
+              to={item.to}
               hash={item.hash}
               className={cn('self-start whitespace-nowrap pt-px text-[14.5px] font-semibold transition-colors', textColor)}
             >
@@ -176,8 +176,8 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
           </Link>
           {navItems.map((item) => (
             <Link
-              key={item.hash}
-              to="/"
+              key={item.label}
+              to={item.to}
               hash={item.hash}
               onClick={closeMenu}
               className="rounded-md px-2 py-2.5 text-[15px] font-semibold text-ink"

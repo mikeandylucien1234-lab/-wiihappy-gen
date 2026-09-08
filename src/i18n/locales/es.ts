@@ -194,6 +194,17 @@ export const es: typeof fr = {
     openInMaps: 'Abrir en Google Maps',
   },
 
+  contactPage: {
+    eyebrow: 'CONTACTO',
+    title: 'Hablemos de tu proyecto',
+    subtitle: '¿Una pregunta, una necesidad específica? Nuestro equipo te responde rápidamente, por teléfono, WhatsApp o email.',
+    phoneLabel: 'Teléfono',
+    emailLabel: 'Email',
+    whatsappLabel: 'WhatsApp',
+    hoursLabel: 'Horario',
+    ctaQuote: 'Solicitar presupuesto',
+  },
+
   faq: {
     title: 'Preguntas frecuentes',
     subtitle: 'Todo lo que necesita saber antes de empezar',

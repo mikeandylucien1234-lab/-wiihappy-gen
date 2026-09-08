@@ -203,6 +203,17 @@ export const fr = {
     openInMaps: 'Ouvrir dans Google Maps',
   },
 
+  contactPage: {
+    eyebrow: 'CONTACT',
+    title: 'Parlons de votre projet',
+    subtitle: "Une question, un besoin spécifique ? Notre équipe vous répond rapidement, par téléphone, WhatsApp ou email.",
+    phoneLabel: 'Téléphone',
+    emailLabel: 'Email',
+    whatsappLabel: 'WhatsApp',
+    hoursLabel: 'Horaires',
+    ctaQuote: 'Demander un devis',
+  },
+
   faq: {
     title: 'Questions fréquentes',
     subtitle: "Tout ce qu'il faut savoir avant de commencer",
